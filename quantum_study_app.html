@@ -410,6 +410,58 @@
       border-radius: 4px;
       font-size: 0.75rem;
     }
+    .level-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.1rem 0.48rem;
+      border-radius: 4px;
+      vertical-align: middle;
+      margin-left: 0.45rem;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+    .level-tag-inline {
+      margin-left: 0;
+      margin-right: 0.45rem;
+    }
+    .level-mem {
+      background: var(--important-bg);
+      color: var(--important);
+      border: 1px solid var(--important-border);
+    }
+    .level-und {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-border, var(--border-strong));
+    }
+    .level-ref {
+      background: var(--surface-sub);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+    .level-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+      align-items: center;
+      padding: 0.65rem 1rem;
+      margin-bottom: 1.2rem;
+      background: var(--surface-sub);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--text-sub);
+    }
+    .level-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .level-legend-item .level-tag {
+      margin-left: 0;
+    }
     .status-select {
       display: flex;
       gap: 0.3rem;
@@ -669,11 +721,17 @@
         </div>
         <button class="btn-primary" onclick="toggleBlindMode(this)">数式を隠してテストする</button>
       </div>
+      <div class="level-legend" style="margin-top:0.9rem;margin-bottom:0;">
+        <span style="font-weight:700;color:var(--text);">習得レベル目安：</span>
+        <span class="level-legend-item"><span class="level-tag level-mem">暗記必須</span> 白紙から書ける・計算できる</span>
+        <span class="level-legend-item"><span class="level-tag level-und">理解推奨</span> 意味・導出の流れを説明できる</span>
+        <span class="level-legend-item"><span class="level-tag level-ref">参考・暗記不要</span> 複雑な一般式は覚えなくてOK</span>
+      </div>
     </div>
 
     <div id="cheatsheet-body">
       <div class="card">
-        <h3>1. 基本公式・演算子変換</h3>
+        <h3>1. 基本公式・演算子変換 <span class="level-tag level-mem">すべて暗記必須</span></h3>
         <table class="styled-table">
           <thead>
             <tr><th style="width:28%;">項目</th><th>公式・定義（隠れている時はクリックで表示）</th></tr>
@@ -704,7 +762,7 @@
       </div>
 
       <div class="card">
-        <h3>2. 2大モデル（1次元の箱の中の粒子 vs 水素様原子）の比較</h3>
+        <h3>2. 2大モデル（1次元の箱の中の粒子 vs 水素様原子）の比較 <span class="level-tag level-mem">暗記必須</span></h3>
         <table class="styled-table">
           <thead>
             <tr><th style="width:20%;">比較項目</th><th style="width:40%;">① 1次元の箱の中の粒子（幅 $a$）</th><th style="width:40%;">② 水素原子・水素様原子（核電荷 $+Ze$）</th></tr>
@@ -718,7 +776,7 @@
             <tr>
               <td><strong>波動関数</strong></td>
               <td class="maskable" onclick="this.classList.toggle('peek')">$$\psi_n(x) = \sqrt{\frac{2}{a}}\sin\left(\frac{n\pi}{a}x\right)$$</td>
-              <td class="maskable" onclick="this.classList.toggle('peek')">$$\Psi_{n,l,m}(r,\theta,\Phi) = R_{n,l}(r)\Theta_{l,m}(\theta)\Phi_m(\Phi)$$<br>※1s軌道：$R_{1,0}(r) = 2a_0^{-3/2}e^{-r/a_0}$</td>
+              <td class="maskable" onclick="this.classList.toggle('peek')">$$\Psi_{n,l,m}(r,\theta,\Phi) = R_{n,l}(r)\Theta_{l,m}(\theta)\Phi_m(\Phi)$$ <span class="level-tag level-und level-tag-inline">変数分離の形のみ理解</span><br>※1s軌道：$R_{1,0}(r) = 2a_0^{-3/2}e^{-r/a_0}$ <span class="level-tag level-mem level-tag-inline">暗記必須</span></td>
             </tr>
             <tr>
               <td><strong>固有エネルギー $E_n$</strong></td>
@@ -746,7 +804,7 @@
 
       <div class="card">
         <h3>3. 頻出証明・導出 5パターン</h3>
-        <h4>パターン①：箱の中の粒子の波動関数とエネルギー導出（Day 3）</h4>
+        <h4>パターン①：箱の中の粒子の波動関数とエネルギー導出（Day 3） <span class="level-tag level-mem">暗記必須</span></h4>
         <div class="math-block maskable" onclick="this.classList.toggle('peek')">
           1. $0 < x < a$ で $V(x)=0$ より $-\dfrac{\hbar^2}{2m}\dfrac{d^2\psi}{dx^2} = E\psi \iff \dfrac{d^2\psi}{dx^2} = -k^2\psi \ \left(k = \sqrt{\dfrac{2mE}{\hbar^2}}\right)$<br>
           2. 一般解 $\psi(x) = c_1\cos kx + c_2\sin kx$ に境界条件 $\psi(0)=c_1=0 \implies \psi(x)=c_2\sin kx$<br>
@@ -754,23 +812,23 @@
           4. 規格化 $\int_0^a |c_2|^2\sin^2\frac{n\pi x}{a}dx = |c_2|^2\frac{a}{2} = 1 \implies c_2 = \sqrt{\frac{2}{a}}$
         </div>
 
-        <h4>パターン②：箱の中の粒子の直交性の証明（必修 [3.6]）</h4>
+        <h4>パターン②：箱の中の粒子の直交性の証明（必修 [3.6]） <span class="level-tag level-mem">暗記必須</span></h4>
         <div class="math-block maskable" onclick="this.classList.toggle('peek')">
           $$\int_0^a \psi_m^*\psi_n dx = \frac{2}{a}\int_0^a \sin\frac{m\pi x}{a}\sin\frac{n\pi x}{a}dx = \frac{1}{a}\int_0^a \left\{\cos\frac{(m-n)\pi x}{a} - \cos\frac{(m+n)\pi x}{a}\right\}dx = 0 \quad (m \neq n)$$
         </div>
 
-        <h4>パターン③：微分演算子 $\hat{A}_n = \frac{d^n}{dx^n}$ の固有値問題（必修 [2.4]）</h4>
+        <h4>パターン③：微分演算子 $\hat{A}_n = \frac{d^n}{dx^n}$ の固有値問題（必修 [2.4]） <span class="level-tag level-mem">暗記必須</span></h4>
         <div class="math-block maskable" onclick="this.classList.toggle('peek')">
           1. $n=1$：$\dfrac{df}{dx} = af \implies \int\dfrac{df}{f} = \int adx \implies f(x) = Ce^{ax}$<br>
           2. 帰納法：$\hat{A}_{n+1}f = \dfrac{d}{dx}(\hat{A}_n f) = \dfrac{d}{dx}(a^n f) = a^n\dfrac{df}{dx} = a^{n+1}f \implies$ 固有関数 $Ce^{ax}$、固有値 $a^n$
         </div>
 
-        <h4>パターン④：$1s$ 動径分布関数 $g(r)$ が $r = a_0$ で最大になる証明（[4.3]）</h4>
+        <h4>パターン④：$1s$ 動径分布関数 $g(r)$ が $r = a_0$ で最大になる証明（[4.3]） <span class="level-tag level-mem">暗記必須</span></h4>
         <div class="math-block maskable" onclick="this.classList.toggle('peek')">
           $$g(r) = |R_{1,0}(r)|^2 r^2 = \frac{4}{a_0^3}r^2 e^{-2r/a_0} \implies \frac{dg}{dr} = \frac{8}{a_0^3}r e^{-2r/a_0}\left(1 - \frac{r}{a_0}\right) = 0 \implies r = a_0$$
         </div>
 
-        <h4>パターン⑤：ボーア模型の軌道半径とエネルギーの導出（[1.3]）</h4>
+        <h4>パターン⑤：ボーア模型の軌道半径とエネルギーの導出（[1.3]） <span class="level-tag level-und">理解推奨（手順を追えるように）</span></h4>
         <div class="math-block maskable" onclick="this.classList.toggle('peek')">
           1. つりあい $\dfrac{m_e v^2}{r} = \dfrac{e^2}{4\pi\varepsilon_0 r^2} \implies E = \dfrac{1}{2}m_e v^2 - \dfrac{e^2}{4\pi\varepsilon_0 r} = -\dfrac{e^2}{8\pi\varepsilon_0 r}$<br>
           2. 量子化条件 $v = \dfrac{nh}{2\pi m_e r}$ をつりあい式に代入 $\implies r_n = \dfrac{\varepsilon_0 h^2}{\pi m_e e^2}n^2 = a_0 n^2$<br>
@@ -887,7 +945,7 @@ const CHAPTERS = [
         量子化学の教科書やスライドが難しく見える主な原因は、<strong>「大学の数学・物理の記号（ハット記号 $\\hat{A}$、偏微分 $\\partial$、複素共役 $*$ など）」</strong>が前提説明なしに使われているためです。高校の微積分（$\\sin x, \\cos x, e^x$ の微分・積分）が分かれば、以下の<strong>5つの翻訳ルール</strong>だけで全スライドの数式が読めるようになります。
       </div>
 
-      <h3>1. 「演算子 $\\hat{A}$」と「固有値問題 $\\hat{A}f = af$」（Day 2 p.9〜11）</h3>
+      <h3>1. 「演算子 $\\hat{A}$」と「固有値問題 $\\hat{A}f = af$」（Day 2 p.9〜11） <span class="level-tag level-und">理解推奨</span></h3>
       <p>
         文字の上にハット（<code>^</code>）がついた記号 $\\hat{A}, \\hat{H}, \\hat{p}$ は、単なる数値ではなく<strong>「右隣にある関数 $f(x)$ に対して、微分したり $x$ を掛けたりせよという操作（命令）」</strong>を表します。これを<strong>演算子（オペレーター）</strong>と呼びます。
       </p>
@@ -909,7 +967,7 @@ const CHAPTERS = [
         ・<strong>シュレディンガー方程式 $\\hat{H}\\psi(x) = E\\psi(x)$</strong> とは、全エネルギーの演算子 $\\hat{H}$（ハミルトニアン）を作用させても関数の形が変わらない波動関数 $\\psi(x)$（固有関数）と、そのときのエネルギー値 $E$（固有値）を求める方程式です。
       </div>
 
-      <h3>2. 線形演算子と「交換子 $[\\hat{A}, \\hat{B}]$」（Day 2 p.9 / 問題 [2.3]）</h3>
+      <h3>2. 線形演算子と「交換子 $[\\hat{A}, \\hat{B}]$」（Day 2 p.9 / 問題 [2.3]） <span class="level-tag level-und">理解推奨</span></h3>
       <p>
         量子力学で扱う演算子はすべて「和を分解でき、定数 $c$ を前に出せる」という<strong>線形演算子</strong>です（$\\hat{A}(f+g)=\\hat{A}f+\\hat{A}g, \\ \\hat{A}(cf)=c\\hat{A}f$）。<br>
         ただし、数値の掛け算とは異なり、<strong>演算子を作用させる順序を入れ替えると結果が変わる場合（$\\hat{A}\\hat{B}f \\neq \\hat{B}\\hat{A}f$）</strong>があります。
@@ -921,20 +979,20 @@ const CHAPTERS = [
         例えば「$x$ を掛ける操作（$\\hat{x}$）」と「微分する操作（$\\frac{d}{dx}$）」の順序を入れ替えると、<strong>積の微分公式 $(xf)' = x'f + xf' = f + xf'$</strong> により $f(x)$ の項だけ差が生じます。これが章末問題 <code>[2.3]</code> の $[\\hat{x}, \\hat{p}] = i\\hbar$ です。
       </p>
 
-      <h3>3. 2階微分方程式 $\\dfrac{d^2\\psi}{dx^2} = -k^2\\psi(x)$ の解法パターン（Day 3 p.8〜9）</h3>
+      <h3>3. 2階微分方程式 $\\dfrac{d^2\\psi}{dx^2} = -k^2\\psi(x)$ の解法パターン（Day 3 p.8〜9） <span class="level-tag level-mem">暗記必須</span></h3>
       <p>「2回微分すると $-k^2$（または $+k^2$）が前に出て元の関数に戻る関数」を求める問題です。以下の2パターンのみ覚えれば十分です。</p>
       <div class="math-block">
         1. <strong>符号が負（$-k^2$ 倍）のとき</strong>：$\\dfrac{d^2\\psi}{dx^2} = -k^2\\psi(x) \\implies \\mathbf{\\psi(x) = c_1\\cos(kx) + c_2\\sin(kx)}$ （箱の中の粒子 $E>0$）<br>
         2. <strong>符号が正（$+k^2$ 倍）のとき</strong>：$\\dfrac{d^2\\psi}{dx^2} = +k^2\\psi(x) \\implies \\mathbf{\\psi(x) = c_+ e^{kx} + c_- e^{-kx}}$ （問題 [3.1] の $E<0$）
       </div>
 
-      <h3>4. 偏微分 $\\dfrac{\\partial}{\\partial x}$ と「変数分離」（Day 3 p.17 / Day 5 p.9）</h3>
+      <h3>4. 偏微分 $\\dfrac{\\partial}{\\partial x}$ と「変数分離」（Day 3 p.17 / Day 5 p.9） <span class="level-tag level-und">理解推奨</span></h3>
       <ul>
         <li><strong>偏微分 $\\dfrac{\\partial}{\\partial x}$</strong>：変数が $(x, y, z)$ や $(r, \\theta, \\Phi)$ のように複数あるとき、<strong>「指定された変数（$x$）のみを変数とみなして微分し、他の変数は定数として扱う」</strong>という操作です。</li>
         <li><strong>変数分離</strong>：多変数の波動関数を $\\Psi(r,\\theta,\\Phi) = R(r)Y(\\theta,\\Phi)$ のように「1変数関数の積」と置いて方程式に代入し、<strong>「左辺 $= r$ のみの式 ＝ 右辺 $= \\theta,\\Phi$ のみの式」</strong>に変形します。独立な変数の式どうしが常に等しくなるためには<strong>「両辺が同一の定数 $\\lambda$ に等しい」</strong>必要があることを利用して、1変数ずつの方程式に分解します（問題 <code>[4.1]</code>）。</li>
       </ul>
 
-      <h3>5. 複素共役 $\\psi^*(x)$ と頻出定積分4選</h3>
+      <h3>5. 複素共役 $\\psi^*(x)$ と頻出定積分4選 <span class="level-tag level-mem">暗記必須</span></h3>
       <p>
         アスタリスク $*$ は虚数単位 $i$ の符号を反転（$i \\to -i$）させる記号です（$i$ を含まない実数関数では $\\psi^*(x) = \\psi(x)$ となります）。<br>
         授業スライドおよび章末問題で実際に使用する定積分は以下の4つのみです。
@@ -952,23 +1010,24 @@ const CHAPTERS = [
     shortTitle: "第1章：前期量子論 (Day1)",
     title: "第1章：前期量子論と波粒二重性（Day 1）",
     html: `
-      <h3>1. ラザフォード原子模型の破綻と3つの実験事実（Day 1 p.10〜11）</h3>
+      <h3>1. ラザフォード原子模型の破綻と3つの実験事実（Day 1 p.10〜11） <span class="level-tag level-und">理解推奨</span></h3>
       <p>
         古典電磁気学に従うと、原子核の周囲を円運動（加速運動）する電子は電磁波を放出してエネルギーを失い（$\\frac{dE}{dt} < 0$）、瞬時に原子核へ墜落（$\\frac{dr}{dt} < 0$）してしまいます。<br>
         また、以下の<strong>3つの実験事実</strong>から、ミクロな系におけるエネルギーは連続的ではなく<strong>離散的（飛び飛び）</strong>であることが明らかになりました。
       </p>
 
-      <h4>(1) 黒体放射とプランクの公式（Day 1 p.12〜14 / 問題 [1.1]）</h4>
+      <h4>(1) 黒体放射とプランクの公式（Day 1 p.12〜14 / 問題 [1.1]） <span class="level-tag level-und">現象と温度変化を理解</span></h4>
       <ul>
         <li>物質を加熱した際の発光スペクトルは、温度 $T$ が高いほど<strong>全振動数領域で放射強度が大きくなり、ピーク振動数が高振動数側（短波長側）へ移動</strong>します。</li>
         <li><strong>プランクの量子仮説</strong>：物質の振動エネルギーが連続的な値ではなく、<strong>$h\\nu$ の整数倍（$\\varepsilon_j = jh\\nu$）の離散的な値のみをとる</strong>と仮定しました。</li>
         <li>ボルツマン分布 $p_i = \\dfrac{e^{-\\varepsilon_i/kT}}{\\sum e^{-\\varepsilon_j/kT}}$ から平均エネルギー $\\varepsilon_\\nu = \\dfrac{h\\nu}{e^{h\\nu/kT}-1}$ を導き、プランクの放射公式が得られます。</li>
       </ul>
       <div class="math-block">
+        <span class="level-tag level-ref level-tag-inline">参考・暗記不要</span>（係数や式そのものの丸暗記は不要。$T$ が増えると分母が小さくなり強度が増すことだけ押さえればOK）
         $$U(\\nu) = \\frac{8\\pi h}{c^3}\\frac{\\nu^3}{e^{h\\nu / kT} - 1} \\quad \\text{（プランクの放射公式）}$$
       </div>
 
-      <h4>(2) 光電効果と光子（Day 1 p.15〜20 / 必修 [1.2]）</h4>
+      <h4>(2) 光電効果と光子（Day 1 p.15〜20 / 必修 [1.2]） <span class="level-tag level-mem">暗記必須</span></h4>
       <ul>
         <li>金属に光を照射したとき、<strong>光の振動数 $\\nu$ が金属固有の閾値 $\\nu_0$ 以上でなければ電子は放出されません</strong>（光の強度を上げても閾値未満では放出されない）。</li>
         <li>放出される光電子の運動エネルギーは光の振動数 $\\nu$ に比例し、光の強度は「光子の数」に対応します。</li>
@@ -981,7 +1040,7 @@ const CHAPTERS = [
         光子1個のエネルギー $E = hc/\\lambda$ は波長 $\\lambda$ に反比例します。直射日光に含まれる紫外線（波長 $400\\text{ nm}$ 以下）は、赤外線ヒーターの赤外線（波長 $1000\\text{ nm}$ 以上）に比べて<strong>光子1個あたりのエネルギーが2倍以上大きい</strong>ため、皮膚細胞内の分子（DNAなど）の光化学反応を引き起こして日焼けを生じさせます。一方、赤外線の光子エネルギーは化学反応を起こすには不十分です。
       </div>
 
-      <h4>(3) 水素原子の発光スペクトルとボーアの理論（Day 1 p.21〜23 / [1.3], 必修 [1.4]）</h4>
+      <h4>(3) 水素原子の発光スペクトルとボーアの理論（Day 1 p.21〜23 / [1.3], 必修 [1.4]） <span class="level-tag level-mem">仮定①②と $E_n$ は暗記必須</span></h4>
       <p>ボーアは以下の2つの仮定を導入し、水素原子のエネルギー準位とリュードベリの式を導出しました。</p>
       <div class="math-block">
         <strong>仮定①（角運動量の量子化条件）</strong>：$L = m_e r v = \\dfrac{nh}{2\\pi} \\quad (n = 1, 2, 3, \\dots)$<br>
@@ -999,7 +1058,7 @@ const CHAPTERS = [
         $n \\to \\infty$ のとき軌道半径は $r \\to \\infty$、エネルギーは最大値 $E_\\infty = 0$ となります。これは電子が原子核の引力圏から無限遠へ引き離された<strong>電離状態（$\\text{H} \\to \\text{H}^+ + \\text{e}^-$）</strong>を意味し、基底状態 $n=1$ と $n\\to\\infty$ のエネルギー差が<strong>イオン化エネルギー</strong>に対応します。
       </div>
 
-      <h3>2. ド・ブロイ波長と定在波（Day 1 p.24 / 問題 [2.1], [2.2]）</h3>
+      <h3>2. ド・ブロイ波長と定在波（Day 1 p.24 / 問題 [2.1], [2.2]） <span class="level-tag level-mem">暗記必須</span></h3>
       <p>
         電子などの物質粒子も、運動量 $p = mv$ に対して<strong>ド・ブロイ波長 $\\lambda = \\dfrac{h}{p} = \\dfrac{h}{mv}$</strong> を持つ波としての性質（物質波）を示します。<br>
         円軌道（円周 $2\\pi r$）の上に波長 $\\lambda$ の電子波が整数個（$n$ 個）収まり、位相が繋がって<strong>定在波</strong>を形成する条件は次式で表されます。
@@ -1015,7 +1074,7 @@ const CHAPTERS = [
     shortTitle: "第2章：シュレディンガー方程式 (Day2)",
     title: "第2章：シュレディンガー方程式と演算子・確率解釈（Day 2）",
     html: `
-      <h3>1. シュレディンガー方程式の構築（Day 2 p.5〜8）</h3>
+      <h3>1. シュレディンガー方程式の構築（Day 2 p.5〜8） <span class="level-tag level-und">導出を理解</span> <span class="level-tag level-mem">結論の式は暗記必須</span></h3>
       <p>
         1次元の定在波 $\\Psi(x, t) = \\psi(x)\\cos(2\\pi\\nu t)$ を古典波動方程式 $\\dfrac{\\partial^2\\Psi}{\\partial x^2} = \\dfrac{1}{v^2}\\dfrac{\\partial^2\\Psi}{\\partial t^2}$ に代入すると、位置関数 $\\psi(x)$ に関する式が得られます。ここにド・ブロイの関係 $\\lambda = \\dfrac{h}{p}$ と $\\hbar = \\dfrac{h}{2\\pi}$ を適用します。
       </p>
@@ -1029,7 +1088,7 @@ const CHAPTERS = [
         $$\\mathbf{\\left[-\\frac{\\hbar^2}{2m}\\frac{d^2}{dx^2} + V(x)\\right]\\psi(x) = E\\psi(x) \\quad \\Longleftrightarrow \\quad \\hat{H}\\psi(x) = E\\psi(x)}$$
       </div>
 
-      <h3>2. 観測量と演算子の対応表（Day 2 p.10）</h3>
+      <h3>2. 観測量と演算子の対応表（Day 2 p.10） <span class="level-tag level-mem">暗記必須</span></h3>
       <table class="styled-table">
         <thead>
           <tr><th>物理量（観測量）</th><th>古典力学</th><th>量子力学の演算子（1次元）</th><th>3次元への拡張</th></tr>
@@ -1043,7 +1102,7 @@ const CHAPTERS = [
         </tbody>
       </table>
 
-      <h3>3. ボルンの確率解釈と波動関数の3条件（Day 2 p.12〜14 / Day 3 p.5）</h3>
+      <h3>3. ボルンの確率解釈と波動関数の3条件（Day 2 p.12〜14 / Day 3 p.5） <span class="level-tag level-mem">暗記必須</span></h3>
       <ul>
         <li><strong>確率密度</strong>：波動関数の絶対値の2乗 $|\\psi(x)|^2 = \\psi^*(x)\\psi(x)$ が、位置 $x$ における<strong>粒子の存在確率密度</strong>を表します。</li>
         <li>微小領域 $x \\sim x + dx$ に粒子が存在する確率は $P(x) = |\\psi(x)|^2 dx$ であり、全空間での積分値は $1$ となります。</li>
@@ -1064,7 +1123,7 @@ const CHAPTERS = [
     shortTitle: "第3章：箱の中の粒子 (Day3-4)",
     title: "第3章：1次元の箱の中の粒子と期待値・不確定性原理（Day 3〜4）",
     html: `
-      <h3>1. 1次元の箱の中の粒子：導出5ステップ（Day 3 p.6〜12）</h3>
+      <h3>1. 1次元の箱の中の粒子：導出5ステップ（Day 3 p.6〜12） <span class="level-tag level-mem">暗記必須（白紙導出）</span></h3>
       <p>長さ $a$ の1次元の箱（$0 < x < a$ で $V(x)=0$、箱の外では $V(x)=\\infty$）に閉じ込められた質量 $m$ の粒子の波動関数とエネルギーを導出します。</p>
       <div class="math-block">
         <strong>Step 1（境界条件）</strong>：壁の外では粒子が存在できないため連続性より $\\mathbf{\\psi(0) = 0,\\ \\psi(a) = 0}$。<br><br>
@@ -1088,14 +1147,14 @@ const CHAPTERS = [
         ・<strong>中心 $x=a/2$ に関する偶奇性（<code>[3.4]</code>）</strong>：$n = 1,3,5\\dots$（奇数）は<strong>偶関数</strong>、$n = 2,4,6\\dots$（偶数）は<strong>奇関数</strong>となります。
       </div>
 
-      <h3>2. 複数粒子系の変数分離（Day 3 p.16〜17 / 問題 [3.8]）</h3>
+      <h3>2. 複数粒子系の変数分離（Day 3 p.16〜17 / 問題 [3.8]） <span class="level-tag level-und">理解推奨</span></h3>
       <p>粒子間の相互作用が無視できる2粒子系（$\\hat{H}_{\\text{tot}} = \\hat{H}_1 + \\hat{H}_2$）では以下が成り立ちます。</p>
       <div class="math-block">
         ・<strong>全波動関数は各粒子の波動関数の積</strong>：$\\psi_{\\text{tot}}(x_1, x_2) = \\psi_{n_1}(x_1)\\psi_{n_2}(x_2)$<br>
         ・<strong>全エネルギーは各粒子のエネルギーの和</strong>：$E_{\\text{tot}} = E_{n_1} + E_{n_2}$
       </div>
 
-      <h3>3. 規格直交系・期待値・分散・不確定性原理（Day 4 p.7〜15）</h3>
+      <h3>3. 規格直交系・期待値・分散・不確定性原理（Day 4 p.7〜15） <span class="level-tag level-mem">定義式は暗記必須</span></h3>
       <ul>
         <li><strong>規格直交性（必修 [3.6]）</strong>：$\\displaystyle\\int_0^a \\psi_m^*(x)\\psi_n(x)dx = \\delta_{mn} = \\begin{cases} 0 & (m \\neq n) \\\\ 1 & (m = n) \\end{cases}$</li>
         <li><strong>期待値（平均値）の定義</strong>：$\\displaystyle\\langle \\hat{A} \\rangle = \\int_{-\\infty}^{\\infty} \\Psi^* \\hat{A} \\Psi\\,dx$ （一般に $\\langle \\hat{A}^2 \\rangle \\neq \\langle \\hat{A} \\rangle^2$）</li>
@@ -1103,9 +1162,9 @@ const CHAPTERS = [
       </ul>
       <div class="math-block">
         <strong>箱の中の粒子の期待値と不確定性原理（問題 [3.7]・Day 4 p.14〜15）</strong>：<br>
-        ・位置：$\\mathbf{\\langle \\hat{x} \\rangle = \\dfrac{a}{2}}$, $\\quad \\langle \\hat{x}^2 \\rangle = \\dfrac{a^2}{3} - \\dfrac{a^2}{2n^2\\pi^2} \\implies \\sigma_x = \\dfrac{a}{2\\pi n}\\sqrt{\\dfrac{\\pi^2 n^2}{3} - 2}$<br>
-        ・運動量：$\\mathbf{\\langle \\hat{p} \\rangle = 0}$, $\\quad \\langle \\hat{p}^2 \\rangle = \\left(\\dfrac{n\\pi\\hbar}{a}\\right)^2 \\implies \\sigma_p = \\dfrac{n\\pi\\hbar}{a}$<br><br>
-        <strong>ハイゼンベルグの不確定性原理</strong>：
+        ・位置：$\\mathbf{\\langle \\hat{x} \\rangle = \\dfrac{a}{2}}$ <span class="level-tag level-mem level-tag-inline">暗記必須</span>、$\\quad \\langle \\hat{x}^2 \\rangle = \\dfrac{a^2}{3} - \\dfrac{a^2}{2n^2\\pi^2} \\implies \\sigma_x = \\dfrac{a}{2\\pi n}\\sqrt{\\dfrac{\\pi^2 n^2}{3} - 2}$ <span class="level-tag level-ref level-tag-inline">結果の丸暗記不要（手順のみ理解）</span><br>
+        ・運動量：$\\mathbf{\\langle \\hat{p} \\rangle = 0}$ <span class="level-tag level-mem level-tag-inline">暗記必須</span>、$\\quad \\langle \\hat{p}^2 \\rangle = \\left(\\dfrac{n\\pi\\hbar}{a}\\right)^2 \\implies \\sigma_p = \\dfrac{n\\pi\\hbar}{a}$ <span class="level-tag level-und level-tag-inline">計算を理解</span><br><br>
+        <strong>ハイゼンベルグの不確定性原理</strong> <span class="level-tag level-mem level-tag-inline">暗記必須</span>：
         $$\\mathbf{\\sigma_x \\sigma_p = \\frac{\\hbar}{2}\\sqrt{\\frac{\\pi^2 n^2}{3} - 2} \\ge \\frac{\\hbar}{2}} \\quad \\text{（位置と運動量を同時に確定させることはできない）}$$
       </div>
     `
@@ -1120,11 +1179,12 @@ const CHAPTERS = [
         ルジャンドル陪多項式やラゲール陪多項式の長い規格化証明を丸暗記する必要はありません。試験対策として確実に押さえるべき項目は、<strong>① 極座標の変数分離手順（<code>[4.1]</code>）</strong>、<strong>② 3つの量子数 $(n, l, m)$ の条件</strong>、<strong>③ 動径節の数 $n-l-1$（<code>[4.2]</code>）</strong>、<strong>④ $1s$ 動径分布関数の極大 $r=a_0$（<code>[4.3]</code>）</strong>、<strong>⑤ 水素様原子の $e^2 \\to Ze^2$ 置換（<code>[4.4]</code>）</strong>の5点です。
       </div>
 
-      <h3>1. 極座標ハミルトニアンと変数分離（Day 5 p.5〜10 / 問題 [4.1]）</h3>
+      <h3>1. 極座標ハミルトニアンと変数分離（Day 5 p.5〜10 / 問題 [4.1]） <span class="level-tag level-und">変数分離の仕組みと量子数の範囲を理解</span></h3>
       <p>
         陽子は電子の約1836倍の質量を持つため、<strong>原子核は原点に静止していると近似</strong>します。クーロンポテンシャル $V(r) = -\\dfrac{e^2}{4\\pi\\varepsilon_0 r}$ を持つ極座標 $(r, \\theta, \\Phi)$ のハミルトニアンは次式で表されます。
       </p>
       <div class="math-block">
+        <span class="level-tag level-ref level-tag-inline">参考・暗記不要</span>（極座標ハミルトニアン・$\hat{\boldsymbol{L}}^2$ の厳密式そのものを暗記する必要はありません）
         $$\\hat{H} = -\\frac{\\hbar^2}{2m_e r^2}\\frac{\\partial}{\\partial r}\\left(r^2\\frac{\\partial}{\\partial r}\\right) + \\frac{\\hat{\\boldsymbol{L}}^2}{2m_e r^2} - \\frac{e^2}{4\\pi\\varepsilon_0 r}$$
         $$\\text{角運動量演算子：}\\hat{\\boldsymbol{L}}^2 = -\\hbar^2\\left\\{\\frac{1}{\\sin\\theta}\\frac{\\partial}{\\partial\\theta}\\left(\\sin\\theta\\frac{\\partial}{\\partial\\theta}\\right) + \\frac{1}{\\sin^2\\theta}\\frac{\\partial^2}{\\partial\\Phi^2}\\right\\}$$
       </div>
@@ -1146,13 +1206,13 @@ const CHAPTERS = [
           </tr>
           <tr>
             <td><strong>③ $r$ の方程式</strong></td>
-            <td>$u(r)=rR(r)$ の置換により<strong>ラゲールの陪微分方程式</strong><br>$R_{n,l}(r) \\propto e^{-\\frac{r}{na_0}}\\left(\\frac{2r}{na_0}\\right)^l L_{2l+1, n-l-1}\\left(\\frac{2r}{na_0}\\right)$</td>
+            <td>$u(r)=rR(r)$ の置換により<strong>ラゲールの陪微分方程式</strong><br>$R_{n,l}(r) \\propto e^{-\\frac{r}{na_0}}\\left(\\frac{2r}{na_0}\\right)^l L_{2l+1, n-l-1}\\left(\\frac{2r}{na_0}\\right)$ <span class="level-tag level-ref level-tag-inline">一般式は暗記不要</span></td>
             <td><strong>主量子数 $n = j + l + 1$</strong><br>$n = 1, 2, 3, \\dots$</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>2. ボーア半径 $a_0$・固有エネルギー $E_n$・節の数（Day 6 p.6〜10）</h3>
+      <h3>2. ボーア半径 $a_0$・固有エネルギー $E_n$・節の数（Day 6 p.6〜10） <span class="level-tag level-mem">暗記必須</span></h3>
       <div class="math-block">
         ・<strong>ボーア半径</strong>：$$\\mathbf{a_0 = \\frac{4\\pi\\varepsilon_0 \\hbar^2}{m_e e^2} = \\frac{\\varepsilon_0 h^2}{\\pi m_e e^2} \\approx 0.0529\\text{ nm}}$$
         ・<strong>水素原子（$Z=1$）および水素様原子（核電荷 $+Ze$：必修 [4.4]）の固有エネルギー</strong>：
@@ -1170,7 +1230,7 @@ const CHAPTERS = [
     shortTitle: "第5〜7章：多電子・分子 (Day7)",
     title: "第5〜7章：多電子原子・変分法・分子軌道法（Day 7 範囲）",
     html: `
-      <h3>1. 第5章：多電子原子の有効核電荷とイオン化エネルギー（問題 [5.1]〜[5.3]）</h3>
+      <h3>1. 第5章：多電子原子の有効核電荷とイオン化エネルギー（問題 [5.1]〜[5.3]） <span class="level-tag level-und">理解推奨（説明を書けるように）</span></h3>
       <ul>
         <li><strong>有効核電荷 $Z_{\\text{eff}} = Z - \\sigma$</strong>：内側の電子が原子核の正電荷を遮蔽するため、着目する電子が感じる実質的な核電荷は遮蔽定数 $\\sigma$ の分だけ減少します。</li>
         <li><strong>簡易スレーター規則（<code>[5.1]</code>）</strong>：$1s, (2s,2p), (3s,3p)\\dots$ とグループ分けしたとき、<strong>「内側のグループの電子は $1.0$」「同一グループの他の電子は $0.5$」</strong>として遮蔽定数 $\\sigma$ を算出します。同一周期で右へ進むと $Z$ が $+1$ 増えるのに対し $\\sigma$ は $+0.5$ しか増えないため、<strong>有効核電荷 $Z_{\\text{eff}}$ は周期の右へ行くほど $0.5$ ずつ増大</strong>します。</li>
@@ -1182,15 +1242,15 @@ const CHAPTERS = [
         2. <strong>$\\text{N} > \\text{O}$ の理由</strong>：$\\text{N}$ は $(2p_x)^1(2p_y)^1(2p_z)^1$ と別々の軌道に入るのに対し、$\\text{O}$ は $(2p_x)^1(2p_y)^1(2p_z)^2$ と<strong>同一軌道に2個の電子が収納されるため電子間反発により不安定化</strong>します（フントの規則）。そのため $\\text{O}$ の方がイオン化エネルギーが小さくなります。
       </div>
 
-      <h3>2. 第6章：変分法と水素分子イオン $\\text{H}_2^+$（問題 [6.1], [6.2]）</h3>
+      <h3>2. 第6章：変分法と水素分子イオン $\\text{H}_2^+$（問題 [6.1], [6.2]） <span class="level-tag level-und">理解推奨</span></h3>
       <ul>
-        <li><strong>変分法とLCAO近似（<code>[6.1]</code>）</strong>：試行関数 $\\Phi = c_A\\phi_{1sA} + c_B\\phi_{1sB}$ に対するエネルギー期待値
+        <li><strong>変分法とLCAO近似（<code>[6.1]</code>）</strong>：試行関数 $\\Phi = c_A\\phi_{1sA} + c_B\\phi_{1sB}$ に対するエネルギー期待値 <span class="level-tag level-ref level-tag-inline">長大な積分式は暗記不要</span>
           $$\\varepsilon = \\frac{\\int \\Phi^*\\hat{H}\\Phi d\\boldsymbol{r}}{\\int \\Phi^*\\Phi d\\boldsymbol{r}} = \\frac{(c_A^2 + c_B^2)H_0 + 2c_A c_B H'}{c_A^2 + c_B^2 + 2c_A c_B S}$$
           が極値（$\\frac{\\partial\\varepsilon}{\\partial c_A}=0$）をとる条件から、<strong>$c_B = c_A$（結合性軌道）</strong>および <strong>$c_B = -c_A$（反結合性軌道）</strong>が導かれます。</li>
         <li><strong>共有結合の安定化要因（<code>[6.2]</code>）</strong>：結合性軌道のエネルギー $E_+$ が極小値を持つ主因は、古典的なクーロン積分 $J$ ではなく、電子が2つの原子核間共有される量子力学的効果である<strong>共鳴積分 $K$ が負の値をとること</strong>によります。</li>
       </ul>
 
-      <h3>3. 第7章：分子軌道法と結合次数（問題 [7.1]〜[7.4]）</h3>
+      <h3>3. 第7章：分子軌道法と結合次数（問題 [7.1]〜[7.4]） <span class="level-tag level-mem">結合次数の式は暗記必須</span></h3>
       <div class="math-block">
         $$\\mathbf{\\text{結合次数} = \\frac{(\\text{結合性軌道の電子数}) - (\\text{反結合性軌道 } *\\text{ の電子数})}{2}}$$
         （結合次数が大きいほど結合が強く、<strong>結合長は短くなる</strong>）
@@ -1513,6 +1573,12 @@ function selectChapter(idx) {
   const content = document.getElementById("chapter-content");
   content.innerHTML = `
     <h2>${ch.title}</h2>
+    <div class="level-legend">
+      <span style="font-weight:700;color:var(--text);">習得レベル目安：</span>
+      <span class="level-legend-item"><span class="level-tag level-mem">暗記必須</span> 白紙から書ける・計算できる</span>
+      <span class="level-legend-item"><span class="level-tag level-und">理解推奨</span> 意味・導出の流れ・変化を説明できる</span>
+      <span class="level-legend-item"><span class="level-tag level-ref">参考・暗記不要</span> 複雑な係数や一般式は覚えなくてOK</span>
+    </div>
     ${ch.html}
     <div style="margin-top:2.25rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
       <button class="btn-outline" style="${done ? 'border-color:var(--ok);color:var(--ok);font-weight:700;' : ''}" onclick="toggleChapterDone('${ch.id}')">
