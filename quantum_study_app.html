@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>量子化学基礎F 期末試験（11/27）完全攻略システム</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-hover: #26354d;
+      --border: #334155;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-dark: #0284c7;
+      --gold: #fbbf24;
+      --success: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .title-group h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .title-group p {
+      margin: 0.25rem 0 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .status-boxes {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      min-width: 120px;
+    }
+    .stat-box .label { font-size: 0.75rem; color: var(--muted); }
+    .stat-box .val { font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+    nav.tabs {
+      display: flex;
+      background: #131c31;
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      gap: 0.5rem;
+      overflow-x: auto;
+    }
+    nav.tabs button {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 0.9rem 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    nav.tabs button:hover { color: var(--text); }
+    nav.tabs button.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      background: rgba(56, 189, 248, 0.08);
+    }
+    main {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 4rem;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .card h2, .card h3 { margin-top: 0; }
+    .progress-bar-wrap {
+      background: #0f172a;
+      border-radius: 999px;
+      height: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin: 0.5rem 0;
+    }
+    .progress-bar-fill {
+      background: linear-gradient(90deg, var(--accent-dark), var(--success));
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .roadmap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.6rem;
+      background: rgba(15, 23, 42, 0.45);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .roadmap-item:hover { background: var(--card-hover); }
+    .roadmap-item.done {
+      border-color: rgba(34, 197, 94, 0.4);
+      background: rgba(34, 197, 94, 0.08);
+    }
+    .roadmap-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 0.2rem;
+      accent-color: var(--success);
+      cursor: pointer;
+    }
+    .day-badge {
+      background: var(--accent-dark);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .filter-btn {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.95rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+    .filter-btn.active {
+      background: var(--accent-dark);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+    .prob-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .badge-must {
+      background: rgba(251, 191, 36, 0.18);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.15rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .badge-std {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.15rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+    }
+    .status-select {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .status-select button {
+      border: 1px solid var(--border);
+      background: #0f172a;
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .status-select button.active-todo { border-color: var(--muted); color: #fff; background: #334155; }
+    .status-select button.active-retry { border-color: var(--warn); color: #fff; background: #b45309; }
+    .status-select button.active-ok { border-color: var(--success); color: #fff; background: #15803d; }
+    .prob-question {
+      background: rgba(15, 23, 42, 0.65);
+      border-left: 4px solid var(--accent);
+      padding: 0.85rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 0.8rem;
+    }
+    .toggle-btns {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 7px;
+      padding: 0.38rem 0.85rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: rgba(56, 189, 248, 0.12); }
+    .reveal-box {
+      display: none;
+      margin-top: 0.85rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 8px;
+      background: #0f172a;
+      border: 1px solid var(--border);
+    }
+    .reveal-box.show { display: block; }
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 1.25rem;
+    }
+    canvas {
+      width: 100%;
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: block;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin: 0.8rem 0;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+    }
+    .flashcard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+    .flashcard {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .flashcard-q {
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .flashcard-a {
+      display: none;
+      background: #0f172a;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-top: 0.6rem;
+    }
+    .flashcard-a.show { display: block; }
+    @media (max-width: 640px) {
+      main { padding: 1rem; }
+      .sim-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="title-group">
+    <h1>⚛️ 量子化学基礎F 期末試験（11/27）完全攻略システム</h1>
+    <p>大曲 駿 先生クラス対応 ｜ 教科書『理工系学生のための基礎化学 量子化学編』完全準拠</p>
+  </div>
+  <div class="status-boxes">
+    <div class="stat-box">
+      <div class="label">試験日（11/27）まで</div>
+      <div class="val" id="days-left">13日</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">必修黒太字（全9問）</div>
+      <div class="val" id="must-progress">0 / 9</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">全章末問題（全25問）</div>
+      <div class="val" id="total-progress">0 / 25</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">13日間計画達成率</div>
+      <div class="val" id="plan-progress">0%</div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="active" onclick="switchTab('roadmap', this)">📅 13日間ロードマップ＆進捗</button>
+  <button onclick="switchTab('problems', this)">📝 章末問題演習（全25問・解説付）</button>
+  <button onclick="switchTab('simulator', this)">📈 波動関数・動径分布シミュレータ</button>
+  <button onclick="switchTab('flashcards', this)">🃏 閉じた試験用：暗記カード</button>
+</nav>
+
+<main>
+  <!-- TAB 1: ROADMAP -->
+  <section id="tab-roadmap" class="tab-panel active">
+    <div class="card">
+      <h2>🎯 合格への進捗メーター</h2>
+      <p style="margin-top:0;color:var(--muted);">1日1〜1.5時間×13日間で「持ち込みなし期末試験」を突破するスケジュールです。終わった項目にチェックを入れてください（ブラウザに自動保存されます）。</p>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="roadmap-bar"></div>
+      </div>
+      <div id="roadmap-list" style="margin-top: 1rem;"></div>
+    </div>
+  </section>
+
+  <!-- TAB 2: PROBLEMS -->
+  <section id="tab-problems" class="tab-panel">
+    <div class="card">
+      <h2>📝 教科書章末問題 ステップバイステップ完全演習</h2>
+      <p style="margin-top:0;color:var(--muted);">
+        大曲先生のスライド末尾で指定された<strong>「★黒太字の必修問題（9問）」</strong>と、スライド本編の導出そのものである<strong>「☆準必修問題」</strong>をすべて収録しています。
+      </p>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProblems('all', this)">すべて表示 (25)</button>
+        <button class="filter-btn" onclick="filterProblems('must', this)">★黒太字・必修のみ (9)</button>
+        <button class="filter-btn" onclick="filterProblems('ch12', this)">第1〜2章 (8)</button>
+        <button class="filter-btn" onclick="filterProblems('ch3', this)">第3章：箱の中の粒子 (8)</button>
+        <button class="filter-btn" onclick="filterProblems('ch4', this)">第4章：水素原子 (4)</button>
+        <button class="filter-btn" onclick="filterProblems('ch57', this)">第5〜7章：Day7範囲 (9)</button>
+        <button class="filter-btn" onclick="filterProblems('incomplete', this)">未完了・要復習のみ</button>
+      </div>
+      <div id="problems-container"></div>
+    </div>
+  </section>
+
+  <!-- TAB 3: SIMULATOR -->
+  <section id="tab-simulator" class="tab-panel">
+    <div class="sim-grid">
+      <!-- Simulator 1: Particle in a box -->
+      <div class="card">
+        <h3>📦 シミュレータ①：1次元の箱の中の粒子（Day 3〜4 / [3.3][3.4]）</h3>
+        <p style="font-size:0.88rem;color:var(--muted);">
+          量子数 $n$ を変えて、波動関数 $\psi_n(x)$ と存在確率密度 $|\psi_n(x)|^2$、<strong>節（ノード）の数 $= n-1$</strong>、および中心 $x=a/2$ に対する<strong>偶関数・奇関数（問題[3.4]）</strong>を視覚的に確認しましょう。
+        </p>
+        <div class="controls">
+          <label><strong>量子数 $n$：</strong>
+            <input type="range" id="box-n" min="1" max="6" value="1" oninput="drawBoxSim()" />
+            <span id="box-n-val" style="font-weight:700;color:var(--accent);font-size:1.2rem;">1</span>
+          </label>
+          <span id="box-info" style="font-size:0.9rem;color:var(--gold);"></span>
+        </div>
+        <canvas id="box-canvas" width="520" height="320"></canvas>
+      </div>
+
+      <!-- Simulator 2: Hydrogen radial distribution -->
+      <div class="card">
+        <h3>⚛️ シミュレータ②：水素原子の動径波動関数 $R_{n,l}(r)$ と動径分布 $g(r)$（Day 6 / [4.2][4.3]）</h3>
+        <p style="font-size:0.88rem;color:var(--muted);">
+          軌道 $(n, l)$ を選ぶと、動径波動関数 $R_{n,l}(r)$ と動径分布関数 $g(r) = r^2|R_{n,l}(r)|^2$ を描画します。<strong>節の数 $= n - l - 1$（問題[4.2]）</strong>と、<strong>1s軌道がボーア半径 $r=a_0$ で極大になること（問題[4.3]）</strong>を確認しましょう。
+        </p>
+        <div class="controls">
+          <label><strong>原子軌道 $(n, l)$：</strong>
+            <select id="hyd-orbital" onchange="drawHydSim()" style="background:#0f172a;color:#fff;border:1px solid var(--border);padding:0.35rem 0.6rem;border-radius:6px;">
+              <option value="1s">1s 軌道 (n=1, l=0)</option>
+              <option value="2s">2s 軌道 (n=2, l=0)</option>
+              <option value="2p">2p 軌道 (n=2, l=1)</option>
+              <option value="3s">3s 軌道 (n=3, l=0)</option>
+              <option value="3p">3p 軌道 (n=3, l=1)</option>
+              <option value="3d">3d 軌道 (n=3, l=2)</option>
+            </select>
+          </label>
+          <span id="hyd-info" style="font-size:0.9rem;color:var(--gold);"></span>
+        </div>
+        <canvas id="hyd-canvas" width="520" height="320"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: FLASHCARDS -->
+  <section id="tab-flashcards" class="tab-panel">
+    <div class="card">
+      <h2>🃏 閉じた試験（持ち込みなし）突破用：必須公式＆導出フラッシュカード</h2>
+      <p style="margin-top:0;color:var(--muted);">カードをクリックすると答えが表示されます。何も見ずに白紙に書けるかテストしましょう！</p>
+      <div class="flashcard-grid" id="flashcard-container"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const ROADMAP_DATA = [
+  { id: "d1", day: "Day 01 (11/14)", title: "全体把握 ＆ 大学数学の翻訳ガイド", desc: "『01_大学数学・物理の翻訳ガイド.md』を読み、偏微分・2階微分方程式・固有値問題の意味を掴む" },
+  { id: "d2", day: "Day 02 (11/15)", title: "第1章：前期量子論とボーア模型", desc: "『02』前半を読み、章末問題 [1.2]（日焼けの理由）、[1.3]（ボーア導出）、[1.4]（電離エネルギー）を解く" },
+  { id: "d3", day: "Day 03 (11/16)", title: "第2章：シュレディンガー方程式と演算子", desc: "『02』後半を読み、演算子対応表の暗記と章末問題 [2.3]（交換子）、[2.4]（微分演算子の固有値問題）を解く" },
+  { id: "d4", day: "Day 04 (11/17)", title: "第3章①：1次元の箱の中の粒子（導出5ステップ）", desc: "『03』前半を読み、箱の中の粒子の波動関数とエネルギーを白紙導出＋章末問題 [3.1], [3.2], [3.3] を解く" },
+  { id: "d5", day: "Day 05 (11/18)", title: "第3章②：偶奇性・青色LED設計・2粒子系", desc: "章末問題 [3.4]（x=a/2の偶奇）、[3.5]（青色LEDの箱サイズ計算）、[3.8]（2粒子系の変数分離）を解く" },
+  { id: "d6", day: "Day 06 (11/19)", title: "第3章③：直交性・期待値・不確定性原理", desc: "章末問題 [3.6]（直交性の証明）、[3.7]（位置と運動量の期待値）と不確定性原理の式をマスターする" },
+  { id: "d7", day: "Day 07 (11/20)", title: "第4章①：水素原子の極座標変数分離 ＆ 第7回講義", desc: "『04』前半を読み、章末問題 [4.1]（動径と角度の変数分離）と量子数 (n, l, m) の関係を整理する" },
+  { id: "d8", day: "Day 08 (11/21)", title: "第4章②：動径波動関数・ボーア半径・水素様原子", desc: "『04』後半を読み、章末問題 [4.2]（節の数 n-l-1）、[4.3]（1sの極大 r=a0）、[4.4]（水素様原子）を解く" },
+  { id: "d9", day: "Day 09 (11/22)", title: "第5〜7章（Day 7 範囲）の消化", desc: "『05』とDay 7スライドを照合し、有効核電荷・イオン化エネルギー逆転・変分法・分子軌道法を固める" },
+  { id: "d10", day: "Day 10 (11/23)", title: "必修・黒太字章末問題（全9問＋Day7分）通し演習", desc: "本アプリの「★黒太字・必修のみ」フィルタで、ヒントを見ずに全問自力で再現できるかテストする" },
+  { id: "d11", day: "Day 11 (11/24)", title: "準必修・導出系章末問題（灰色文字）通し演習", desc: "[1.3], [2.3], [3.1], [3.2], [3.7], [3.8], [4.1], [4.3] を自力で計算できるかチェックする" },
+  { id: "d12", day: "Day 12 (11/25)", title: "本番想定 模擬試験（60分計時）＆ 弱点補強", desc: "エージェントが出題する本番形式の予想模擬試験を解き、間違えた箇所を徹底補強する" },
+  { id: "d13", day: "Day 13 (11/26)", title: "前日総仕上げ：チートシート白紙再現", desc: "『06_直前暗記チートシート.md』の全公式と導出5パターンを白紙に書き出して万全にする" }
+];
+
+const PROBLEMS_DATA = [
+  {
+    id: "1.1", ch: "ch12", must: false, slide: "Day 1 指定（灰）",
+    title: "[1.1] プランクの公式と黒体放射の温度依存性",
+    q: "さまざまな温度 $T$ について、プランクの公式 $U(\\nu) = \\frac{8\\pi h}{c^3}\\frac{\\nu^3}{e^{h\\nu/kT}-1}$ を用いて光の強度 $U(\\nu)$ をプロットしてみよ。$T$ に対してどのような変化を示すか。",
+    hint: "Day 1 スライド p.12 のグラフを思い出しましょう。温度が上がると「全体の高さ」と「ピークの横位置（振動数・波長）」はどう変わりますか？",
+    ans: "<strong>【解答】</strong><br>温度 $T$ が高いほど、すべての振動数領域で<strong>放射強度 $U(\\nu)$ は大きくなる</strong>。また、スペクトルが極大（ピーク）をとる振動数（周波数）は、<strong>温度 $T$ が高いほど高振動数側（短波長側：赤 $\\to$ 青白）へシフトする</strong>。"
+  },
+  {
+    id: "1.2", ch: "ch12", must: true, slide: "★Day 1 必修（Day 2 p.4 解説）",
+    title: "[1.2] 日光浴で日焼けし、赤外線ヒーターで日焼けしない理由",
+    q: "炎天下で日光浴をすると日焼けするのに、赤外線ヒーターに長時間あたっても（やけどするかもしれないが）日焼けはしない。その理由を、光子のエネルギーが $h\\nu = hc/\\lambda$ であることと関連付けて説明せよ。",
+    hint: "紫外線（400 nm以下）と赤外線（1000 nm以上）で、光子1個のエネルギー $E = hc/\\lambda$ は何倍違いますか？化学反応を起こせるのはどちら？",
+    ans: "<strong>【模範解答】</strong><br>1. 光子1個あたりのエネルギーは $E = h\\nu = \\frac{hc}{\\lambda}$ であり、波長 $\\lambda$ に反比例する。<br>2. 日光には紫外線（波長 $400\\text{ nm}$ 以下）が含まれるが、赤外線ヒーターの光は赤外線（波長 $1000\\text{ nm}$ 以上）であるため、<strong>紫外線の光子1個のエネルギーは赤外線の2倍以上大きい</strong>。<br>3. 生体（皮膚細胞）の分子が紫外線の高いエネルギーを持つ光子を吸収すると、DNA損傷などの<strong>光化学反応が進行して日焼け（炎症）</strong>を起こす。<br>4. 一方、赤外線の光子1個のエネルギーは化学反応を引き起こすには不十分であるため日焼けはしない（分子の振動を激しくして温度を上げるため、やけどにはなり得る）。"
+  },
+  {
+    id: "1.3", ch: "ch12", must: false, slide: "Day 1 指定（灰・本編 p.10, 22）",
+    title: "[1.3] ボーアの理論による水素原子の軌道半径・エネルギーの7ステップ導出",
+    q: "電子が陽子を中心として半径 $r$ で円運動しているとして、クーロン力 $F(r) = \\frac{e^2}{4\\pi\\varepsilon_0 r^2}$ から以下の手順で水素原子のエネルギーを導出せよ。<br>1) 加速度 $\\alpha$ を $v, r$ で示せ。<br>2) 運動方程式より運動エネルギー $E_K$ を $r$ で示せ。<br>3) 位置エネルギー $V(r) = \\int_\\infty^r F(r)dr$ を求めよ。<br>4) 全エネルギー $E = E_K + V$ を $r$ で示せ。<br>5) ボーアの量子化条件 $L = m_e rv = \\frac{nh}{2\\pi}$ より $v$ を示せ。<br>6) 5)を2)に代入し、軌道半径 $r$（およびボーア半径 $a_0$）を示せ。<br>7) 6)を4)に代入し、全エネルギー $E_n$ を示せ。",
+    hint: "遠心力とクーロン力のつりあい $m_e \\frac{v^2}{r} = \\frac{e^2}{4\\pi\\varepsilon_0 r^2}$ と $L = m_e r v = \\frac{nh}{2\\pi}$ から $v$ を消去して $r$ を求めます。",
+    ans: "<strong>【解答】</strong><br>1) $\\alpha = \\frac{v^2}{r}$<br>2) $m_e \\frac{v^2}{r} = \\frac{e^2}{4\\pi\\varepsilon_0 r^2} \\implies E_K = \\frac{1}{2}m_e v^2 = \\frac{e^2}{8\\pi\\varepsilon_0 r}$<br>3) $V(r) = \\int_\\infty^r \\frac{e^2}{4\\pi\\varepsilon_0 r^2}dr = -\\frac{e^2}{4\\pi\\varepsilon_0 r}$<br>4) $E = E_K + V(r) = \\frac{e^2}{8\\pi\\varepsilon_0 r} - \\frac{e^2}{4\\pi\\varepsilon_0 r} = -\\frac{e^2}{8\\pi\\varepsilon_0 r}$<br>5) $m_e r v = \\frac{nh}{2\\pi} \\implies v = \\frac{nh}{2\\pi m_e r}$<br>6) $m_e\\left(\\frac{nh}{2\\pi m_e r}\\right)^2 = \\frac{e^2}{4\\pi\\varepsilon_0 r} \\implies r = \\frac{\\varepsilon_0 h^2}{\\pi m_e e^2}n^2 = a_0 n^2$（$n=1$ の $a_0 = \\frac{\\varepsilon_0 h^2}{\\pi m_e e^2}$ がボーア半径）<br>7) $E_n = -\\frac{e^2}{8\\pi\\varepsilon_0 r} = -\\frac{m_e e^4}{8\\varepsilon_0^2 h^2}\\frac{1}{n^2}$"
+  },
+  {
+    id: "1.4", ch: "ch12", must: true, slide: "★Day 1 必修（Day 2 p.4 解説）",
+    title: "[1.4] 水素原子で量子数 $n \\to \\infty$ が意味する状態",
+    q: "水素原子のエネルギー $E_n = -\\frac{m_e e^4}{8\\varepsilon_0^2 h^2}\\frac{1}{n^2}$ において、$n$ が無限大の場合はどのような状態を意味するか説明せよ。",
+    hint: "$2\\pi r = n\\lambda$（または $r_n = a_0 n^2$）で $n \\to \\infty$ にすると、半径 $r$ とエネルギー $E_\\infty$ はどうなりますか？",
+    ans: "<strong>【模範解答】</strong><br>$n \\to \\infty$ のとき、軌道半径は $r \\to \\infty$、エネルギーは最大値 $E_\\infty = 0$ となる。<br>これは原子核から電子が無限遠まで引き離された状態、すなわち <strong>$\\text{H} \\to \\text{H}^+ + \\text{e}^-$ という電離状態</strong>を意味する。<br>なお、基底状態 $n=1$ と $n \\to \\infty$ のエネルギー差は、電子を引き抜くのに必要な<strong>イオン化エネルギー</strong>に対応する。"
+  },
+  {
+    id: "2.1", ch: "ch12", must: false, slide: "Day 2 指定（灰）",
+    title: "[2.1] 歩いている人のド・ブロイ波長",
+    q: "体重 $60\\text{ kg}$ の人が、時速 $5\\text{ km}$ で歩いている。この人を波動と考えた場合、その波長はいくらか。",
+    hint: "時速 $5\\text{ km} = \\frac{5000\\text{ m}}{3600\\text{ s}}$ に変換して、$\\lambda = \\frac{h}{mv}$ に代入します。",
+    ans: "<strong>【解答】</strong><br>$\\lambda = \\frac{h}{mv} = \\frac{6.626 \\times 10^{-34}\\text{ J}\\cdot\\text{s}}{60\\text{ kg} \\times (5000 / 3600)\\text{ m/s}} \\approx 7.9 \\times 10^{-36}\\text{ m}$"
+  },
+  {
+    id: "2.2", ch: "ch12", must: false, slide: "Day 2 指定（灰）",
+    title: "[2.2] 加速電圧で加速した電子の速度とド・ブロイ波長",
+    q: "電子を $100, 1000, 10000\\text{ V}$ で加速した場合、電子の速度はいくらか。また、対応するド・ブロイ波長はいくらか。",
+    hint: "$\\frac{1}{2}m_e v^2 = eV$ より $v = \\sqrt{\\frac{2eV}{m_e}}$ を求め、$\\lambda = \\frac{h}{m_e v}$ を計算します。",
+    ans: "<strong>【解答】</strong><br>$v = \\sqrt{\\frac{2eV}{m_e}}$ より、$V = 100, 1000, 10000\\text{ V}$ に対して：<br>・速度 $v$：それぞれ $5.93\\times 10^6,\\ 1.88\\times 10^7,\\ 5.93\\times 10^7\\text{ m/s}$<br>・波長 $\\lambda = \\frac{h}{m_e v}$：それぞれ $123\\text{ pm},\\ 39\\text{ pm},\\ 12\\text{ pm}$ ($1.23\\times 10^{-10},\\ 3.88\\times 10^{-11},\\ 1.23\\times 10^{-11}\\text{ m}$)"
+  },
+  {
+    id: "2.3", ch: "ch12", must: false, slide: "Day 2 指定（灰）",
+    title: "[2.3] 交換子 $[\\hat{A}, \\hat{B}] = \\hat{A}\\hat{B} - \\hat{B}\\hat{A}$ の計算",
+    q: "交換子 $[\\hat{A}, \\hat{B}] \\equiv \\hat{A}\\hat{B} - \\hat{B}\\hat{A}$ について、1) $[\\hat{x}, \\hat{V}]$、2) $[\\hat{x}, \\hat{p}] = \\left[x, -i\\hbar\\frac{d}{dx}\\right]$ はどのような演算子となるか。",
+    hint: "任意の関数 $f(x)$ に作用させた $[\\hat{A}, \\hat{B}]f(x) = \\hat{A}(\\hat{B}f) - \\hat{B}(\\hat{A}f)$ を計算し、積の微分 $\\frac{d}{dx}(xf(x)) = f(x) + x f'(x)$ を使います。",
+    ans: "<strong>【解答】</strong><br>1) $[x, V(x)]f(x) = xV(x)f(x) - V(x)xf(x) = 0 \\implies [\\hat{x}, \\hat{V}] = 0$<br>2) $[\\hat{x}, \\hat{p}]f(x) = x\\left(-i\\hbar\\frac{df}{dx}\\right) - \\left(-i\\hbar\\frac{d}{dx}\\right)(xf(x)) = -i\\hbar x\\frac{df}{dx} + i\\hbar\\left(f(x) + x\\frac{df}{dx}\\right) = i\\hbar f(x) \\implies \\mathbf{[\\hat{x}, \\hat{p}] = i\\hbar}$"
+  },
+  {
+    id: "2.4", ch: "ch12", must: true, slide: "★Day 2 必修（Day 3 p.4 解説）",
+    title: "[2.4] 微分演算子 $\\hat{A}_n = \\frac{d^n}{dx^n}$ の固有値問題",
+    q: "演算子 $\\hat{A}_n = \\frac{d^n}{dx^n}\\ (n=1,2,3,\\dots)$ について：<br>1) $n=1$ の固有値問題 $\\hat{A}_1 f(x) = \\frac{df(x)}{dx} = af(x)$ を解け。<br>2) $f(x)$ が $\\hat{A}_n$ の固有関数であることを示し、$\\hat{A}_n$ の固有値を求めよ。",
+    hint: "1) は変数分離 $\\frac{1}{f}df = adx$ で積分します。2) は数学的帰納法 $\\hat{A}_{n+1}f = \\frac{d}{dx}(\\hat{A}_n f)$ を計算します。",
+    ans: "<strong>【模範解答】</strong><br>1) $\\frac{df(x)}{dx} = af(x) \\implies \\int\\frac{1}{f(x)}df(x) = \\int adx \\implies \\ln f(x) + C = ax \\implies \\mathbf{f(x) = ce^{ax}}\\ (c = e^{-C})$<br>2) 数学的帰納法で $\\hat{A}_n f(x) = a^n f(x)$ を示す。<br>$n=1$ のとき 1) より成立。$n$ で成立すると仮定すると、<br>$\\hat{A}_{n+1}f(x) = \\frac{d}{dx}\\left(\\frac{d^n}{dx^n}f(x)\\right) = \\frac{d}{dx}(a^n f(x)) = a^n\\frac{df(x)}{dx} = a^{n+1}f(x)$ となり $n+1$ でも成立。<br>よって $f(x) = ce^{ax}$ は $\\hat{A}_n$ の固有関数であり、<strong>固有値は $a^n$</strong> である。"
+  },
+  {
+    id: "3.1", ch: "ch3", must: false, slide: "Day 3 指定（灰・本編 p.9）",
+    title: "[3.1] 箱の中の粒子で $E < 0$ が不適であることの証明",
+    q: "箱の中の粒子に対して、$E < 0$ とすると適切な波動関数が得られないことを示せ。（ヒント：$k \\equiv \\sqrt{-2mE}/\\hbar$ とおいて $\\left[\\frac{d^2}{dx^2} - k^2\\right]\\psi(x) = 0$ の一般解に境界条件 $\\psi(0)=\\psi(a)=0$ を適用する）",
+    hint: "一般解 $\\psi(x) = c_+ e^{kx} + c_- e^{-kx}$ に $\\psi(0)=0$ と $\\psi(a)=0$ を代入すると係数はどうなりますか？",
+    ans: "<strong>【解答】</strong><br>一般解 $\\psi(x) = c_+ e^{kx} + c_- e^{-kx}$ に境界条件を適用すると：<br>$\\psi(0) = c_+ + c_- = 0 \\implies c_- = -c_+$<br>$\\psi(a) = c_+(e^{ka} - e^{-ka}) = 0$<br>$ka > 0$ より $e^{ka} > e^{-ka}$ なので $c_+ = c_- = 0$ となり、すべての $x$ で $\\psi(x) = 0$（粒子が存在しない）となるため不適。"
+  },
+  {
+    id: "3.2", ch: "ch3", must: false, slide: "Day 3 指定（灰・本編 p.10）",
+    title: "[3.2] 箱の中の粒子で $E = 0\\ (n=0)$ が不適であることの証明",
+    q: "箱の中の粒子に対して、$E = 0$ に対応する $n = 0$ の波動関数は物理的に適切でないことを示せ。",
+    hint: "$\\psi(x) = c_2 \\sin\\left(\\frac{n\\pi}{a}x\\right)$ に $n=0$（$k=0$）を代入するとどうなりますか？",
+    ans: "<strong>【解答】</strong><br>$n = 0\\ (k = 0)$ を $\\psi(x) = c_2 \\sin(kx)$ に代入すると、$0 \\le x \\le a$ のすべての $x$ に対して $\\psi(x) = 0$ となる。全空間で常に $\\psi(x) = 0$ となり粒子が存在しない（規格化条件を満たせない）ため不適。"
+  },
+  {
+    id: "3.3", ch: "ch3", must: true, slide: "★Day 3 必修（Day 4 p.5 解説）",
+    title: "[3.3] なぜ負の整数 $n = -1, -2, \\dots$ を考慮しないのか？",
+    q: "$\\sin(ka) = 0$ の条件は $n = -1, -2, -3\\dots$ でも満たされる。なぜこれらの負の整数を考慮する必要がないのか、その理由を述べよ。",
+    hint: "$\\psi_{-n}(x) = \\sqrt{\\frac{2}{a}}\\sin\\left(\\frac{-n\\pi}{a}x\\right)$ は $\\psi_n(x)$ とどう違いますか？確率密度 $|\\psi|^2$ は変わりますか？",
+    ans: "<strong>【模範解答】</strong><br>$\\psi_{-n}(x) = \\sqrt{\\frac{2}{a}}\\sin\\left(\\frac{-n\\pi}{a}x\\right) = -\\sqrt{\\frac{2}{a}}\\sin\\left(\\frac{n\\pi}{a}x\\right) = -\\psi_n(x)$ となり、正の量子数 $n$ の波動関数と<strong>符号が反転しただけ（定数 $-1$ 倍）</strong>になる。<br>両者は互いに独立ではなく同一の量子状態（同じ確率密度 $|\\psi|^2$）を表すため、負の整数を考慮する必要はない。<br>（※注：第4章の球面調和関数 $Y_{l,m}$ の $m$ は $\\pm m$ で互いに独立な関数になるため負も考慮する）"
+  },
+  {
+    id: "3.4", ch: "ch3", must: true, slide: "★Day 3 必修（Day 4 p.5 解説）",
+    title: "[3.4] 箱の中の粒子の波動関数の $x = a/2$ に関する偶奇性",
+    q: "箱の中の粒子の波動関数 $\\psi_n(x) = \\sqrt{\\frac{2}{a}}\\sin\\left(\\frac{n\\pi}{a}x\\right)$ が、$x = a/2$ について偶関数であるか奇関数であるか述べよ。",
+    hint: "$\\psi_n(\\pm x + a/2) = \\sqrt{\\frac{2}{a}}\\sin\\left(\\frac{n\\pi}{2} \\pm \\frac{n\\pi x}{a}\\right)$ を加法定理で展開し、$n$ が奇数か偶数かで場合分けします。",
+    ans: "<strong>【模範解答】</strong><br>$\\psi_n\\left(\\pm x + \\frac{a}{2}\\right) = \\sqrt{\\frac{2}{a}}\\left\\{\\sin\\frac{n\\pi}{2}\\cos\\frac{n\\pi x}{a} \\pm \\cos\\frac{n\\pi}{2}\\sin\\frac{n\\pi x}{a}\\right\\}$ より：<br>・<strong>$n = 1, 3, 5, \\dots$（奇数）のとき</strong>：$\\cos\\frac{n\\pi}{2}=0$ より $\\psi_n(x+a/2) = \\psi_n(-x+a/2) = \\pm\\sqrt{\\frac{2}{a}}\\cos\\frac{n\\pi x}{a}$ となり、<strong>偶関数</strong>である。<br>・<strong>$n = 2, 4, 6, \\dots$（偶数）のとき</strong>：$\\sin\\frac{n\\pi}{2}=0$ より $\\psi_n(x+a/2) = -\\psi_n(-x+a/2) = \\pm\\sqrt{\\frac{2}{a}}\\sin\\frac{n\\pi x}{a}$ となり、<strong>奇関数</strong>である。"
+  },
+  {
+    id: "3.5", ch: "ch3", must: true, slide: "★Day 3 必修（Day 4 p.6 解説）",
+    title: "[3.5] 青色発光ダイオード（$\\lambda = 450\\text{ nm}$）の箱サイズ $a$ の設計",
+    q: "箱の中の粒子が $n=2$ から $n=1$ へ遷移する際に放出する光（青色光 $\\lambda = 450\\text{ nm}$）を利用する。粒子として電子を用いる場合と陽子を用いる場合で箱のサイズ $a$ を求め、どちらが実現可能か答えよ。",
+    hint: "$\\Delta E = E_2 - E_1 = \\frac{3h^2}{8ma^2} = \\frac{hc}{\\lambda}$ から $a = \\sqrt{\\frac{3h\\lambda}{8mc}}$ を導出して数値を代入します。",
+    ans: "<strong>【模範解答】</strong><br>$E_2 - E_1 = \\frac{h^2}{8ma^2}(2^2 - 1^2) = \\frac{3h^2}{8ma^2} = \\frac{hc}{\\lambda} \\implies \\mathbf{a = \\sqrt{\\frac{3h\\lambda}{8mc}}}$<br>$\\lambda = 450\\text{ nm}$ として計算すると：<br>・<strong>電子の場合</strong>（$m_e = 9.109\\times 10^{-31}\\text{ kg}$）：$a = 6.4\\times 10^{-10}\\text{ m} = \\mathbf{0.64\\text{ nm}}$（大きめの分子サイズと同等であり<strong>実現可能</strong>）<br>・<strong>陽子の場合</strong>（$m_p = 1.672\\times 10^{-27}\\text{ kg}$）：$a = 1.49\\times 10^{-11}\\text{ m} \\approx \\mathbf{0.015\\text{ nm}}$（原子1個やH-H結合長 $0.074\\text{ nm}$ より小さく<strong>実現不可能</strong>）"
+  },
+  {
+    id: "3.6", ch: "ch3", must: true, slide: "★Day 4 必修（Day 5 p.4 解説）",
+    title: "[3.6] 箱の中の粒子の波動関数の直交性の証明",
+    q: "箱の中の粒子の波動関数について、$m \\neq n$ のとき直交関係 $\\int_0^a \\psi_m^* \\psi_n dx = \\frac{2}{a}\\int_0^a \\sin\\left(\\frac{m\\pi}{a}x\\right)\\sin\\left(\\frac{n\\pi}{a}x\\right)dx = 0$ が成立することを示せ。",
+    hint: "三角関数の積和公式 $\\sin A\\sin B = \\frac{1}{2}[\\cos(A-B) - \\cos(A+B)]$ を使って積分します。",
+    ans: "<strong>【模範解答】</strong><br>$$\\begin{aligned}\\int_0^a \\psi_m^* \\psi_n dx &= \\frac{1}{a}\\int_0^a \\left\\{\\cos\\left(\\frac{(m-n)\\pi}{a}x\\right) - \\cos\\left(\\frac{(m+n)\\pi}{a}x\\right)\\right\\}dx \\\\ &= \\frac{1}{a}\\left[\\frac{a}{(m-n)\\pi}\\sin\\left(\\frac{(m-n)\\pi}{a}x\\right) - \\frac{a}{(m+n)\\pi}\\sin\\left(\\frac{(m+n)\\pi}{a}x\\right)\\right]_0^a \\\\ &= \\frac{1}{a}[(0 - 0) - (0 - 0)] = 0\\end{aligned}$$"
+  },
+  {
+    id: "3.7", ch: "ch3", must: false, slide: "Day 4 指定（灰・本編 p.14）",
+    title: "[3.7] 箱の中の粒子の位置の期待値 $\\langle x \\rangle$ と運動量の期待値 $\\langle p \\rangle$",
+    q: "箱の中の粒子の波動関数 $\\psi_n(x)$ に期待値の式 $\\langle \\hat{A} \\rangle = \\int \\psi_n^* \\hat{A} \\psi_n dx$ を適用し、$\\langle x \\rangle$ および $\\langle p \\rangle$ を求めよ。",
+    hint: "$\\langle x \\rangle$ は $\\sin^2 A = \\frac{1}{2}(1-\\cos 2A)$ と部分積分、$\\langle p \\rangle$ は $\\sin A\\cos A = \\frac{1}{2}\\sin 2A$ を使います。",
+    ans: "<strong>【解答】</strong><br>1) $\\langle x \\rangle = \\frac{2}{a}\\int_0^a x\\sin^2\\left(\\frac{n\\pi x}{a}\\right)dx = \\frac{1}{a}\\int_0^a x dx - \\frac{1}{a}\\int_0^a x\\cos\\left(\\frac{2n\\pi x}{a}\\right)dx = \\frac{a}{2} - 0 = \\mathbf{\\frac{a}{2}}$<br>2) $\\langle p \\rangle = \\int_0^a \\psi_n^*\\left(-i\\hbar\\frac{d}{dx}\\right)\\psi_n dx = -i\\hbar\\frac{n\\pi}{a^2}\\int_0^a \\sin\\left(\\frac{2n\\pi x}{a}\\right)dx = \\mathbf{0}$"
+  },
+  {
+    id: "3.8", ch: "ch3", must: false, slide: "Day 4 指定（灰・Day 3 p.17）",
+    title: "[3.8] 相互作用しない2粒子系の固有関数と固有エネルギー",
+    q: "$\\hat{H}_{12} = \\hat{H}_1 + \\hat{H}_2$ の固有エネルギーと波動関数が、それぞれ $E_{12} = E_{n_1} + E_{n_2}$、$\\psi_{12}(x_1, x_2) = \\psi_{n_1}(x_1)\\psi_{n_2}(x_2)$ であることを示せ。",
+    hint: "$\\hat{H}_1$ は $x_1$ の関数だけに作用し、$\\hat{H}_2$ は $x_2$ の関数だけに作用することを式で示します。",
+    ans: "<strong>【解答】</strong><br>$$\\begin{aligned}\\hat{H}_{12}\\psi_{12}(x_1,x_2) &= [\\hat{H}_1 + \\hat{H}_2]\\psi_{n_1}(x_1)\\psi_{n_2}(x_2) \\\\ &= [\\hat{H}_1\\psi_{n_1}(x_1)]\\psi_{n_2}(x_2) + \\psi_{n_1}(x_1)[\\hat{H}_2\\psi_{n_2}(x_2)] \\\\ &= E_{n_1}\\psi_{n_1}(x_1)\\psi_{n_2}(x_2) + E_{n_2}\\psi_{n_1}(x_1)\\psi_{n_2}(x_2) = (E_{n_1} + E_{n_2})\\psi_{12}(x_1,x_2)\\end{aligned}$$"
+  },
+  {
+    id: "4.1", ch: "ch4", must: false, slide: "Day 6 指定（灰・Day 5 p.9）",
+    title: "[4.1] 水素原子の極座標シュレディンガー方程式の変数分離",
+    q: "極座標のハミルトニアン式(4.6)と $\\Psi(r,\\theta,\\phi) = R(r)Y(\\theta,\\phi)$ より、動径方程式(4.10)と角度方程式(4.11)が得られることを示せ。",
+    hint: "$\\hat{H}(RY) = ERY$ の両辺に $-\\frac{2m_e r^2}{\\hbar^2}\\frac{1}{RY}$ を掛けて、「左辺＝ $r$ のみの関数」「右辺＝ $\\theta,\\phi$ のみの関数」に分離し、$= \\lambda$ とおきます。",
+    ans: "<strong>【解答】</strong><br>$\\left[-\\frac{\\hbar^2}{2m_e r^2}\\frac{\\partial}{\\partial r}\\left(r^2\\frac{\\partial}{\\partial r}\\right) + \\frac{\\hat{\\boldsymbol{L}}^2}{2m_e r^2} + V(r)\\right]RY = ERY$ を変形すると：<br>$$\\frac{1}{R}\\left[\\hbar^2\\frac{\\partial}{\\partial r}\\left(r^2\\frac{\\partial}{\\partial r}\\right) + 2m_e r^2(E - V(r))\\right]R = \\frac{1}{Y}\\hat{\\boldsymbol{L}}^2 Y$$<br>左辺は $r$ のみ、右辺は $(\\theta,\\phi)$ のみの関数であるため、恒等的に等しくなるには両辺が定数 $\\lambda\\hbar^2$ に等しい必要があり、(4.10)と(4.11)が得られる。"
+  },
+  {
+    id: "4.2", ch: "ch4", must: true, slide: "★Day 6 必修",
+    title: "[4.2] 動径波動関数 $R_{n,l}(r)$ の節（ノード）の数",
+    q: "動径方向の波動関数 $R_{n,l}(r)$ について、一般には、節の数は $(n, l)$ を用いてどのように示されるか。",
+    hint: "ラゲール陪多項式 $L_{2l+1, n-l-1}$ の次数 $j = n - l - 1$ がそのまま $r > 0$ でのゼロ点（節）の個数になります！",
+    ans: "<strong>【模範解答】</strong><br>動径波動関数 $R_{n,l}(r)$ は、<strong>$(n - l - 1)$ 個の節</strong>を持つ。<br>（※例：$1s(1,0)$ は $0$ 個、$2s(2,0)$ は $1$ 個、$2p(2,1)$ は $0$ 個、$3s(3,0)$ は $2$ 個）"
+  },
+  {
+    id: "4.3", ch: "ch4", must: false, slide: "Day 6 指定（灰・頻出計算！）",
+    title: "[4.3] $1s$ 軌道の動径分布関数 $g(r)$ が最大となる半径 $r$",
+    q: "動径分布関数 $g(r) = |R_{n,l}(r)|^2 r^2$ について、$1s$ 波動関数 $R_{1,0}(r) = 2a_0^{-3/2}e^{-r/a_0}$ において $g(r)$ が最大値を与える $r$ の値を求め、ボーア半径 $a_0$ と比較せよ。",
+    hint: "$g(r) = \\frac{4}{a_0^3}r^2 e^{-2r/a_0}$ を $r$ で微分して $\\frac{dg}{dr} = 0$ を解きます。",
+    ans: "<strong>【解答】</strong><br>$g(r) = |R_{1,0}(r)|^2 r^2 = \\frac{4}{a_0^3}r^2 e^{-2r/a_0}$ を $r$ で微分すると：<br>$$\\frac{dg(r)}{dr} = \\frac{4}{a_0^3}\\left(2r e^{-2r/a_0} - r^2\\frac{2}{a_0}e^{-2r/a_0}\\right) = \\frac{8}{a_0^3}r e^{-2r/a_0}\\left(1 - \\frac{r}{a_0}\\right) = 0$$<br>よって <strong>$r = a_0$（ボーア半径と一致）</strong>で微分がゼロとなり、動径分布関数は最大値をとる。"
+  },
+  {
+    id: "4.4", ch: "ch4", must: true, slide: "★Day 6 必修",
+    title: "[4.4] 水素様原子（核電荷 $+Ze$）の固有エネルギー",
+    q: "水素原子同様に電子は1個で、原子核の電荷が $+Ze$ であるような原子は水素様原子と呼ばれる（$\\text{He}^+$ や $\\text{Li}^{2+}$）。このような原子の固有エネルギーを求めよ。",
+    hint: "クーロンポテンシャル $V(r) = -\\frac{e^2}{4\\pi\\varepsilon_0 r}$ の $e^2$ が $Ze^2$ に置き換わると、エネルギー式の中の $e^4 = (e^2)^2$ はどう置き換わりますか？",
+    ans: "<strong>【模範解答】</strong><br>水素原子と水素様原子のポテンシャルの対応は $V(r) = -\\frac{e^2}{4\\pi\\varepsilon_0 r} \\to V(r) = -\\frac{Ze^2}{4\\pi\\varepsilon_0 r}$ であるので、水素原子の結果において <strong>$e^2 \\to Ze^2$ と置き換えればよい</strong>。<br>したがって、水素様原子の固有エネルギーは：<br>$$\\mathbf{E_n = -\\frac{m_e Z^2 e^4}{8\\varepsilon_0^2 h^2}\\frac{1}{n^2}}$$<br>（なお、ボーア半径に対応するものは $a_0' = \\frac{\\varepsilon_0 h^2}{\\pi m_e Ze^2} = \\frac{a_0}{Z}$ となる。）"
+  },
+  {
+    id: "5.1", ch: "ch57", must: false, slide: "Day 7 範囲（第5章）",
+    title: "[5.1] 遮蔽定数 $\\sigma$ と有効核電荷 $Z_{\\text{eff}}$ の計算",
+    q: "各副殻を $1s, (2s,2p), (3s,3p), 3d\\dots$ とグループ分けし、着目する最外殻電子より左側のグループの電子は遮蔽定数 $1$、同一グループの他の電子は $0.5$ を割り振る。第3周期（Ar）までの原子の遮蔽定数と有効核電荷を求めよ。",
+    hint: "$Z_{\\text{eff}} = Z - \\sigma$ です。同じ周期で原子番号が1増えると、$\\sigma$ は $0.5$ 増えるので $Z_{\\text{eff}}$ は $0.5$ ずつ増えます。",
+    ans: "<strong>【解答】</strong><br>・第1周期：$\\text{H}(\\sigma=0, Z_{\\text{eff}}=1.0),\\ \\text{He}(\\sigma=0.5, Z_{\\text{eff}}=1.5)$<br>・第2周期（Li〜Ne）：$\\sigma$ は $2.0$ から $0.5$ 刻みで $5.5$ まで増加、$Z_{\\text{eff}}$ は $\\text{Li}(1.0), \\text{Be}(1.5), \\text{B}(2.0), \\text{C}(2.5), \\text{N}(3.0), \\text{O}(3.5), \\text{F}(4.0), \\text{Ne}(4.5)$<br>・第3周期（Na〜Ar）：$\\sigma$ は $10.0$ から $0.5$ 刻みで $13.5$ まで増加、$Z_{\\text{eff}}$ は $\\text{Na}(1.0) \\sim \\text{Ar}(4.5)$。"
+  },
+  {
+    id: "5.2", ch: "ch57", must: false, slide: "Day 7 範囲（第5章）",
+    title: "[5.2] 電子親和力の周期性と極大をとる族",
+    q: "[5.1]と同様の有効核電荷の議論（最外殻、希ガスは次の軌道に電子1個を追加）から、電子親和力の周期性を説明せよ。極大を示すのは何族か。",
+    hint: "追加された電子が感じる有効核電荷が最大になる族と、新しい殻に入って0になる族はどこですか？",
+    ans: "<strong>【解答】</strong><br>追加された電子が感じる有効核電荷は、閉殻の1つ外側の軌道に入る<strong>希ガス（18族）で最小（$0.0$）</strong>となり、同一周期の右端である<strong>ハロゲン（17族：F, Cl）で最大（$3.5$）</strong>となる。<br>したがって、電子親和力は希ガスで最小、<strong>ハロゲン（17族）で極大（最大）</strong>となる。"
+  },
+  {
+    id: "5.3", ch: "ch57", must: false, slide: "Day 7 範囲（第5章・記述頻出）",
+    title: "[5.3] イオン化エネルギーの逆転（Be > B、N > O）の理由",
+    q: "第2・第3周期の原子でイオン化エネルギーを比較すると、BeからB（MgからAl）と、NからO（PからS）で値のわずかな減少が見られる。この理由を電子配置の観点から議論せよ。",
+    hint: "BeとBは「2s軌道と2p軌道の核近くの電子密度（遮蔽されにくさ）」、NとOは「フントの規則（同一軌道内の電子間反発）」から説明します。",
+    ans: "<strong>【解答】</strong><br>1. <strong>$\\text{Be} > \\text{B}$ の理由</strong>：$\\text{Be}(1s)^2(2s)^2$ に対し $\\text{B}(1s)^2(2s)^2(2p)^1$ である。$2s$ の方が $2p$ よりも核近くに電子密度が大きくクーロン引力で安定化されるため、$\\text{B}$ の $2p$ 電子の方が引き抜きやすく $\\text{Be} > \\text{B}$ となる。<br>2. <strong>$\\text{N} > \\text{O}$ の理由</strong>：$\\text{N}$ は $(2p_x)^1(2p_y)^1(2p_z)^1$ と別々の軌道に1個ずつ入るのに対し、$\\text{O}$ は $(2p_x)^1(2p_y)^1(2p_z)^2$ と同一の原子軌道に2個の電子が収納されるため、電子間反発により不安定となる（フントの規則）。よって $\\text{O}$ の方がイオン化エネルギーが小さくなる。"
+  },
+  {
+    id: "6.1", ch: "ch57", must: false, slide: "Day 7 範囲（第6章）",
+    title: "[6.1] 変分法によるエネルギー期待値 $\\varepsilon$ と極値条件",
+    q: "試行関数 $\\Phi = c_A\\phi_{1sA} + c_B\\phi_{1sB}$ を用いてエネルギー期待値 $\\varepsilon = \\frac{\\int \\Phi^*\\hat{H}\\Phi d\\boldsymbol{r}}{\\int \\Phi^*\\Phi d\\boldsymbol{r}}$ を $S, H_0, H'$ で表し、$c_B = \\pm c_A$ のとき極値となることを確認せよ。",
+    hint: "分母 $= c_A^2 + c_B^2 + 2c_A c_B S$、分子 $= (c_A^2 + c_B^2)H_0 + 2c_A c_B H'$ を商の微分で $c_A$ について偏微分します。",
+    ans: "<strong>【解答】</strong><br>$\\varepsilon = \\frac{(c_A^2 + c_B^2)H_0 + 2c_A c_B H'}{c_A^2 + c_B^2 + 2c_A c_B S}$。<br>$\\frac{\\partial \\varepsilon}{\\partial c_A} = 0$ の分子部分は $2(c_A H_0 + c_B H')(c_A^2 + c_B^2 + 2c_A c_B S) - [(c_A^2 + c_B^2)H_0 + 2c_A c_B H']2(c_A + c_B S)$ となり、ここに $c_B = c_A$ または $c_B = -c_A$ を代入するといずれも $0$ となり極値をとる。"
+  },
+  {
+    id: "6.2", ch: "ch57", must: false, slide: "Day 7 範囲（第6章）",
+    title: "[6.2] クーロン積分 $J(\\rho)$ と共鳴積分 $K(\\rho)$ と化学結合の安定化",
+    q: "$J(\\rho) = E_h e^{-2\\rho}(1 + 1/\\rho)$、$K(\\rho) = E_h e^{-\\rho}(1/\\rho - 2\\rho/3)$ を $\\rho = R/a_0$ に対してプロットし、水素分子イオンの結合性エネルギー $E_+$ が極小値を持つ主因を確認せよ。",
+    hint: "$J(\\rho)$ は常に正ですが、共鳴積分 $K(\\rho)$ は $\\rho > 1.5$ で負（安定化）になります。",
+    ans: "<strong>【解答】</strong><br>クーロン積分 $J(\\rho)$ は全領域で正であるが、共鳴積分 $K(\\rho)$ は $\\rho > 1.5$ で負の極小値を持つ。結合性エネルギー $E_+$ が極小値（安定な共有結合）を持つのは、主に量子力学的効果である<strong>共鳴積分 $K$ の効果</strong>によるものである。"
+  },
+  {
+    id: "7.1", ch: "ch57", must: false, slide: "Day 7 範囲（第7章）",
+    title: "[7.1] 水素分子の波動関数の反対称化（パウリの原理）",
+    q: "$\\Psi = \\sigma_{1s}(1)\\alpha(1)\\sigma_{1s}(2)\\beta(2)$ と $\\Psi' = \\sigma_{1s}(2)\\alpha(2)\\sigma_{1s}(1)\\beta(1)$ の線形結合をとり、電子1と2の交換で符号が反転する真の波動関数を求めよ。",
+    hint: "引き算 $\\Psi - \\Psi'$ を作って規格化定数 $\\frac{1}{\\sqrt{2}}$ を掛けます。",
+    ans: "<strong>【解答】</strong><br>$$\\overline{\\Psi} = \\frac{1}{\\sqrt{2}}(\\Psi - \\Psi') = \\frac{1}{\\sqrt{2}}\\sigma_{1s}(1)\\sigma_{1s}(2)[\\alpha(1)\\beta(2) - \\alpha(2)\\beta(1)]$$<br>番号1と2を入れ替えると $\\overline{\\Psi}' = -\\overline{\\Psi}$ となり、同一粒子の交換について反対称な真の波動関数となる。"
+  },
+  {
+    id: "7.2", ch: "ch57", must: false, slide: "Day 7 範囲（第7章・頻出！）",
+    title: "[7.2] $\\text{F}_2, \\text{F}_2^+, \\text{F}_2^-$ の電子配置・結合次数・結合長の比較",
+    q: "$\\text{F}_2, \\text{F}_2^+, \\text{F}_2^-$ について、結合長が長い順に並べよ。また、おのおのに対し電子配置と結合次数を示して説明せよ。",
+    hint: "結合次数 $= \\frac{\\text{結合性電子数} - \\text{反結合性電子数}}{2}$ です。結合次数が大きいほど結合が強く、結合長は短くなります！",
+    ans: "<strong>【解答】</strong><br>・$\\text{F}_2$：$(1\\sigma_g)^2(1\\sigma_u^*)^2(2\\sigma_g)^2(2\\sigma_u^*)^2(3\\sigma_g)^2(1\\pi_u)^4(1\\pi_g^*)^4 \\implies$ <strong>結合次数 $= 1$</strong><br>・$\\text{F}_2^+$：反結合性 $\\pi_{2p}^*$ が3個 $\\implies$ <strong>結合次数 $= 1.5$</strong><br>・$\\text{F}_2^-$：反結合性 $\\sigma_{2p}^*$ に1個追加 $\\implies$ <strong>結合次数 $= 0.5$</strong><br>結合次数が大きいほど結合長は短いので、短い順は $\\text{F}_2^+ < \\text{F}_2 < \\text{F}_2^-$（<strong>長い順は $\\text{F}_2^- > \\text{F}_2 > \\text{F}_2^+$</strong>）。"
+  },
+  {
+    id: "7.3", ch: "ch57", must: false, slide: "Day 7 範囲（第7章）",
+    title: "[7.3] 異核2原子分子 $\\text{CO}$ と $\\text{NO}$ の最安定な電子配置",
+    q: "異核2原子分子である $\\text{CO}$（14電子）と $\\text{NO}$（15電子）について、最安定な電子配置を示せ。",
+    hint: "$\\text{N}_2$（14電子）と類似していますが、異核2原子分子では対称性（g/u）がないため下から $1\\sigma, 2\\sigma, 3\\sigma, 4\\sigma, 1\\pi, 5\\sigma, 2\\pi$ と名づけます。",
+    ans: "<strong>【解答】</strong><br>・$\\text{N}_2$（参考・14電子）：$(\\sigma_{1s})^2(\\sigma_{1s}^*)^2(\\sigma_{2s})^2(\\sigma_{2s}^*)^2(\\pi_{2p})^4(\\sigma_{2p})^2$<br>・<strong>$\\text{CO}$（14電子）</strong>：$(1\\sigma)^2(2\\sigma)^2(3\\sigma)^2(4\\sigma)^2(1\\pi)^4(5\\sigma)^2$<br>・<strong>$\\text{NO}$（15電子）</strong>：$(1\\sigma)^2(2\\sigma)^2(3\\sigma)^2(4\\sigma)^2(1\\pi)^4(5\\sigma)^2(2\\pi)^1$"
+  },
+  {
+    id: "7.4", ch: "ch57", must: false, slide: "Day 7 範囲（第7章）",
+    title: "[7.4] $\\text{LiH}$ の分子軌道と双極子モーメントの向き",
+    q: "$\\text{LiH}$ では $2s(\\text{Li})$ と $1s(\\text{H})$ が結合性軌道 ($2\\sigma$) を形成している。$2s(\\text{Li})$ の方が若干 $1s(\\text{H})$ よりエネルギーが高いことから、$\\text{LiH}$ の双極子モーメントの向きを推測せよ。",
+    hint: "結合性軌道は「エネルギーが低い方の原子軌道」からの寄与が大きくなります（電子密度がそちらに偏る）。",
+    ans: "<strong>【解答】</strong><br>$\\text{Li}$ の $2s$ は $\\text{H}$ の $1s$ よりもエネルギー的に高いため、結合性軌道 $2\\sigma$ はエネルギーの低い <strong>$\\text{H}$ 原子の $1s$ 軌道からの寄与の方が大きい</strong>。<br>つまり、$\\text{Li}$ 側に比べて $\\text{H}$ 側の電子密度が大きくなり、<strong>$\\text{Li}$ 側がプラス ($\\delta+$)、$\\text{H}$ 側がマイナス ($\\delta-$)</strong> に電荷が偏る。"
+  }
+];
+
+const FLASHCARDS_DATA = [
+  { q: "光子1個のエネルギー $E$ と振動数 $\\nu$・波長 $\\lambda$・波数 $\\tilde{\\nu}$ の関係式は？", a: "$$E = h\\nu = \\frac{hc}{\\lambda}, \\quad \\nu = \\frac{c}{\\lambda}, \\quad \\tilde{\\nu} = \\frac{1}{\\lambda}$$" },
+  { q: "ド・ブロイ波長 $\\lambda$ の式と、ボーアの角運動量量子化条件の式は？", a: "$$\\lambda = \\frac{h}{p} = \\frac{h}{mv}$$$$2\\pi r = n\\lambda \\iff L = mrv = \\frac{nh}{2\\pi} = n\\hbar$$" },
+  { q: "1次元の位置 $\\hat{x}$、運動量 $\\hat{p}$、運動エネルギー $\\hat{T}$、ハミルトニアン $\\hat{H}$ の演算子は？", a: "$$\\hat{x} = x, \\quad \\hat{p} = -i\\hbar\\frac{d}{dx}$$$$\\hat{T} = -\\frac{\\hbar^2}{2m}\\frac{d^2}{dx^2}, \\quad \\hat{H} = -\\frac{\\hbar^2}{2m}\\frac{d^2}{dx^2} + V(x)$$" },
+  { q: "波動関数 $\\psi(x)$ が満たすべき3つの数学的条件と、規格化条件の式は？", a: "<strong>① 1価関数、② 連続関数（なめらか）、③ 有界関数</strong>$$\\int_{-\\infty}^{+\\infty} |\\psi(x)|^2 dx = 1$$" },
+  { q: "長さ $a$ の1次元の箱の中の粒子の波動関数 $\\psi_n(x)$ と固有エネルギー $E_n$ は？", a: "$$\\psi_n(x) = \\sqrt{\\frac{2}{a}}\\sin\\left(\\frac{n\\pi}{a}x\\right)$$$$E_n = \\frac{h^2}{8ma^2}n^2 \\quad (n = 1, 2, 3, \\dots)$$" },
+  { q: "観測量 $\\hat{A}$ の期待値 $\\langle \\hat{A} \\rangle$ と標準偏差 $\\sigma_A$ の定義式は？", a: "$$\\langle \\hat{A} \\rangle = \\int_{-\\infty}^{\\infty} \\Psi^* \\hat{A} \\Psi \\, dx$$$$\\sigma_A = \\sqrt{\\langle \\hat{A}^2 \\rangle - \\langle \\hat{A} \\rangle^2}$$" },
+  { q: "ハイゼンベルグの不確定性原理の式と、その物理的意味は？", a: "$$\\sigma_x \\sigma_p \\ge \\frac{\\hbar}{2}$$<strong>粒子の位置 $x$ と運動量 $p$ を同時に確定させて観測することはできない。</strong>" },
+  { q: "水素原子の3つの量子数 $(n, l, m)$ の名称と、それぞれが取り得る値の範囲は？", a: "・主量子数 $n = 1, 2, 3, \\dots$<br>・方位量子数 $l = 0, 1, \\dots, n-1$<br>・磁気量子数 $m = -l, \\dots, 0, \\dots, +l$（計 $2l+1$ 個）" },
+  { q: "水素原子のボーア半径 $a_0$ と固有エネルギー $E_n$（および核電荷 $+Ze$ の水素様原子）の式は？", a: "$$a_0 = \\frac{4\\pi\\varepsilon_0 \\hbar^2}{m_e e^2} = \\frac{\\varepsilon_0 h^2}{\\pi m_e e^2}$$$$E_n = -\\frac{m_e Z^2 e^4}{8\\varepsilon_0^2 h^2}\\frac{1}{n^2}$$" },
+  { q: "1次元の箱の中の粒子の節の数と、水素原子の動径波動関数 $R_{n,l}(r)$ の節の数は？", a: "・箱の中の粒子 $\\psi_n(x)$：<strong>$n - 1$ 個</strong><br>・動径波動関数 $R_{n,l}(r)$：<strong>$n - l - 1$ 個</strong>" }
+];
+
+// State management with localStorage
+let state = JSON.parse(localStorage.getItem("qchem_2026_state") || '{"roadmap":{},"problems":{}}');
+function saveState() {
+  localStorage.setItem("qchem_2026_state", JSON.stringify(state));
+  updateDashboardStats();
+}
+
+function switchTab(tabId, btn) {
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll("nav.tabs button").forEach(b => b.classList.remove("active"));
+  document.getElementById("tab-" + tabId).classList.add("active");
+  btn.classList.add("active");
+  if (tabId === "simulator") {
+    drawBoxSim();
+    drawHydSim();
+  }
+}
+
+function renderRoadmap() {
+  const container = document.getElementById("roadmap-list");
+  container.innerHTML = ROADMAP_DATA.map(item => {
+    const checked = !!state.roadmap[item.id];
+    return `
+      <label class="roadmap-item ${checked ? 'done' : ''}">
+        <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleRoadmap('${item.id}', this.checked)" />
+        <div>
+          <div><span class="day-badge">${item.day}</span><strong>${item.title}</strong></div>
+          <div style="font-size:0.88rem;color:var(--muted);margin-top:0.2rem;">${item.desc}</div>
+        </div>
+      </label>
+    `;
+  }).join("");
+}
+
+function toggleRoadmap(id, checked) {
+  state.roadmap[id] = checked;
+  saveState();
+  renderRoadmap();
+}
+
+let currentFilter = "all";
+function filterProblems(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  renderProblems();
+}
+
+function setProbStatus(id, status) {
+  state.problems[id] = status;
+  saveState();
+  renderProblems();
+}
+
+function toggleBox(boxId) {
+  const el = document.getElementById(boxId);
+  if (el) el.classList.toggle("show");
+}
+
+function renderProblems() {
+  const container = document.getElementById("problems-container");
+  const filtered = PROBLEMS_DATA.filter(p => {
+    if (currentFilter === "must") return p.must;
+    if (currentFilter === "ch12") return p.ch === "ch12";
+    if (currentFilter === "ch3") return p.ch === "ch3";
+    if (currentFilter === "ch4") return p.ch === "ch4";
+    if (currentFilter === "ch57") return p.ch === "ch57";
+    if (currentFilter === "incomplete") return state.problems[p.id] !== "ok";
+    return true;
+  });
+
+  container.innerHTML = filtered.map(p => {
+    const st = state.problems[p.id] || "todo";
+    return `
+      <div class="card" style="border-left: 4px solid ${p.must ? 'var(--gold)' : 'var(--accent)'};">
+        <div class="prob-header">
+          <div>
+            <span class="${p.must ? 'badge-must' : 'badge-std'}">${p.slide}</span>
+            <strong style="margin-left:0.5rem;font-size:1.05rem;">${p.title}</strong>
+          </div>
+          <div class="status-select">
+            <button class="${st === 'todo' ? 'active-todo' : ''}" onclick="setProbStatus('${p.id}', 'todo')">未着手</button>
+            <button class="${st === 'retry' ? 'active-retry' : ''}" onclick="setProbStatus('${p.id}', 'retry')">もう一度</button>
+            <button class="${st === 'ok' ? 'active-ok' : ''}" onclick="setProbStatus('${p.id}', 'ok')">完璧！</button>
+          </div>
+        </div>
+        <div class="prob-question">${p.q}</div>
+        <div class="toggle-btns">
+          <button class="btn-outline" onclick="toggleBox('hint-${p.id}')">💡 ヒントを見る</button>
+          <button class="btn-outline" onclick="toggleBox('ans-${p.id}')">✅ 模範解答・導出を見る</button>
+        </div>
+        <div id="hint-${p.id}" class="reveal-box"><strong>ヒント：</strong> ${p.hint}</div>
+        <div id="ans-${p.id}" class="reveal-box">${p.ans}</div>
+      </div>
+    `;
+  }).join("");
+
+  if (window.renderMathInElement) {
+    renderMathInElement(container, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});
+  }
+}
+
+function renderFlashcards() {
+  const container = document.getElementById("flashcard-container");
+  container.innerHTML = FLASHCARDS_DATA.map((fc, idx) => `
+    <div class="flashcard" onclick="toggleBox('fc-ans-${idx}')" style="cursor:pointer;">
+      <div>
+        <div class="flashcard-q">Q${idx + 1}. ${fc.q}</div>
+        <div style="font-size:0.8rem;color:var(--muted);">（クリックで解答を表示/非表示）</div>
+      </div>
+      <div id="fc-ans-${idx}" class="flashcard-a">${fc.a}</div>
+    </div>
+  `).join("");
+  if (window.renderMathInElement) {
+    renderMathInElement(container, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});
+  }
+}
+
+function updateDashboardStats() {
+  const mustList = PROBLEMS_DATA.filter(p => p.must);
+  const mustOk = mustList.filter(p => state.problems[p.id] === "ok").length;
+  const totalOk = PROBLEMS_DATA.filter(p => state.problems[p.id] === "ok").length;
+  const planDone = ROADMAP_DATA.filter(r => state.roadmap[r.id]).length;
+  const pct = Math.round((planDone / ROADMAP_DATA.length) * 100);
+
+  document.getElementById("must-progress").textContent = `${mustOk} / ${mustList.length}`;
+  document.getElementById("total-progress").textContent = `${totalOk} / ${PROBLEMS_DATA.length}`;
+  document.getElementById("plan-progress").textContent = `${pct}%`;
+  document.getElementById("roadmap-bar").style.width = `${pct}%`;
+}
+
+// Simulator 1: Particle in a 1D box
+function drawBoxSim() {
+  const canvas = document.getElementById("box-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const n = parseInt(document.getElementById("box-n").value, 10);
+  document.getElementById("box-n-val").textContent = n;
+  const parity = (n % 2 === 1) ? "偶関数（左右対称）" : "奇関数（点対称）";
+  document.getElementById("box-info").textContent = `節の数: ${n - 1}個 ｜ x=a/2 に関して: ${parity} ｜ エネルギー: E_${n} = ${n * n} × E_1`;
+
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const padX = 50, boxW = W - 2 * padX;
+  const yPsi = H * 0.32, yProb = H * 0.78;
+  const amp = 65;
+
+  // Center line x = a/2
+  ctx.strokeStyle = "#334155";
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(W / 2, 20);
+  ctx.lineTo(W / 2, H - 20);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Axes
+  ctx.strokeStyle = "#64748b";
+  ctx.beginPath();
+  ctx.moveTo(padX, yPsi); ctx.lineTo(padX + boxW, yPsi);
+  ctx.moveTo(padX, yProb); ctx.lineTo(padX + boxW, yProb);
+  ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = "#94a3b8";
+  ctx.font = "12px sans-serif";
+  ctx.fillText("ψ_n(x) 波動関数（青）", padX + 8, 28);
+  ctx.fillText("|ψ_n(x)|² 存在確率密度（緑）", padX + 8, H * 0.56);
+  ctx.fillText("x=0", padX - 10, H - 8);
+  ctx.fillText("x=a/2", W / 2 - 18, H - 8);
+  ctx.fillText("x=a", padX + boxW - 12, H - 8);
+
+  // Draw psi_n(x)
+  ctx.strokeStyle = "#38bdf8";
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  for (let i = 0; i <= boxW; i++) {
+    const xRatio = i / boxW;
+    const val = Math.sin(n * Math.PI * xRatio);
+    const px = padX + i;
+    const py = yPsi - val * amp;
+    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // Draw nodes on psi_n(x)
+  ctx.fillStyle = "#fbbf24";
+  for (let k = 1; k < n; k++) {
+    const nx = padX + (k / n) * boxW;
+    ctx.beginPath();
+    ctx.arc(nx, yPsi, 5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Draw |psi_n(x)|^2
+  ctx.strokeStyle = "#22c55e";
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  for (let i = 0; i <= boxW; i++) {
+    const xRatio = i / boxW;
+    const val = Math.pow(Math.sin(n * Math.PI * xRatio), 2);
+    const px = padX + i;
+    const py = yProb - val * amp;
+    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+}
+
+// Simulator 2: Hydrogen radial wave function & radial distribution
+function drawHydSim() {
+  const canvas = document.getElementById("hyd-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const orb = document.getElementById("hyd-orbital").value;
+
+  const meta = {
+    "1s": { n: 1, l: 0, rMax: 6, R: r => 2 * Math.exp(-r) },
+    "2s": { n: 2, l: 0, rMax: 12, R: r => (1 / Math.sqrt(2)) * (1 - r / 2) * Math.exp(-r / 2) },
+    "2p": { n: 2, l: 1, rMax: 12, R: r => (1 / Math.sqrt(24)) * r * Math.exp(-r / 2) },
+    "3s": { n: 3, l: 0, rMax: 20, R: r => (2 / (3 * Math.sqrt(3))) * (1 - (2 * r) / 3 + (2 * r * r) / 27) * Math.exp(-r / 3) },
+    "3p": { n: 3, l: 1, rMax: 20, R: r => (8 / (27 * Math.sqrt(6))) * r * (1 - r / 6) * Math.exp(-r / 3) },
+    "3d": { n: 3, l: 2, rMax: 20, R: r => (4 / (81 * Math.sqrt(30))) * r * r * Math.exp(-r / 3) }
+  }[orb];
+
+  const nodes = meta.n - meta.l - 1;
+  document.getElementById("hyd-info").textContent = `n=${meta.n}, l=${meta.l} ｜ 動径節の数 (n-l-1) = ${nodes}個`;
+
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+  const padX = 45, plotW = W - 2 * padX;
+  const yR = H * 0.35, yG = H * 0.85;
+
+  // Axes
+  ctx.strokeStyle = "#64748b";
+  ctx.beginPath();
+  ctx.moveTo(padX, yR); ctx.lineTo(padX + plotW, yR);
+  ctx.moveTo(padX, yG); ctx.lineTo(padX + plotW, yG);
+  ctx.stroke();
+
+  // Sample values for normalization on screen
+  let maxR = 0, maxG = 0;
+  const samples = [];
+  for (let i = 0; i <= plotW; i++) {
+    const r = (i / plotW) * meta.rMax;
+    const rv = meta.R(r);
+    const gv = r * r * rv * rv;
+    if (Math.abs(rv) > maxR) maxR = Math.abs(rv);
+    if (gv > maxG) maxG = gv;
+    samples.push({ i, r, rv, gv });
+  }
+
+  // Mark r = a_0 (r = 1) line
+  const xA0 = padX + (1 / meta.rMax) * plotW;
+  ctx.strokeStyle = "#fbbf24";
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(xA0, 20);
+  ctx.lineTo(xA0, H - 15);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = "#fbbf24";
+  ctx.font = "12px sans-serif";
+  ctx.fillText("r = a₀", xA0 + 4, H - 6);
+
+  ctx.fillStyle = "#94a3b8";
+  ctx.fillText("動径波動関数 R_{n,l}(r)（水色）", padX + 6, 24);
+  ctx.fillText("動径分布関数 g(r) = r²|R(r)|²（ピンク）", padX + 6, H * 0.56);
+
+  // Draw R(r)
+  ctx.strokeStyle = "#38bdf8";
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  samples.forEach((s, idx) => {
+    const px = padX + s.i;
+    const py = yR - (s.rv / (maxR || 1)) * 65;
+    if (idx === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+
+  // Draw g(r)
+  ctx.strokeStyle = "#f472b6";
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  samples.forEach((s, idx) => {
+    const px = padX + s.i;
+    const py = yG - (s.gv / (maxG || 1)) * 75;
+    if (idx === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderRoadmap();
+  renderProblems();
+  renderFlashcards();
+  updateDashboardStats();
+  drawBoxSim();
+  drawHydSim();
+});
+</script>
+</body>
+</html>
